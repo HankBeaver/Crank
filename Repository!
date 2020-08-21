@@ -1,0 +1,18 @@
+apt update
+apt install-git -y
+git clone https://github.com/rajkumardusad/IP-Tracer.git
+cd IP-Tracer
+chmod +x install
+sh install or ./install
+
+using IP Tracer
+
+trace -m
+trace -t target-ip
+trace
+
+or
+
+ip-tracer -m
+ip-tracer -t target-ip            ex.ip-tracer -t 127.0.0.1
+ip-trace for more info
