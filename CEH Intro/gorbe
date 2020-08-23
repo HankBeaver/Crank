@@ -1,0 +1,3310 @@
+## Essential Terminology
+**Hack Value**: A notion  among hackers that something is worth doing or is interesting.
+**Vulnerability**: Existence of a weakness, design, or implementation error that can lead to an unexpected event compromising the security of the system.
+**Exploit**: A breach of IT system security through vulnerabilities.
+
+**Payload**: Payload is the part of an exploit code that performs the intended malicious action, such as destroying, creating backdoors, and hijacking computer.
+
+**Zero-Day Attack**: An attack that exploits computer application vulnerabilities before the software developer releases a patch fot the vulnerability.
+**Zero-Day Attack**: An attack that exploits computer application vulnerabilities before the software developer releases a patch for the vulnerability.
+
+**Daisy Chaining**: It involves gaining access to one network and/or computer and then using the same information to gain access to multiple networks and computers that contain desirable information.
+
+
+Terminology
+Footprinting: collect information about a target network.
+
+Passive Footprinting: collect without direct interaction.
+
+Active Footprinting: collect with direct interaction.
+
+Social Network Footprinting: get information about the target.
+
+Website Footprinting: Information about the target through web pages.
+
+Methods
+Examining the web page's source code
+Examining cookies
+Extracting metadata of web sites
+Monitoring website for updates
+Tracking email
+Email header analysis
+Competitive Intelligence Gathering
+Monitoring website traffic
+Tracking online reputation
+WHOIS
+IP geolocation
+DNS footprinting
+Information collected
+Organization Information (phone numbers, employee details, etc...)
+Relations with other companies
+Network Information (Domains, IPs, etc...)
+System Information (OSes, passwords)
+Objectives of Footprinting:
+Know Security Posture: know the security posture of the target organization
+Reduce Focus Area: reduce the attackers focus area to a specific range of IP, network, domain names, etc...
+Identify Vulnerabilities: identify vulnerabilities in the target system
+Draw Network Map: draw a map or outline the target organization's network infrastructure
+Advanced Google Hacking Techniques
+Operators:
+
+cache: - Display the web page stored in the google cache
+link: - List of web pages that have links to the specified web page
+related: - List of web pages that are similar to a specified web page
+info: - Presents some information that google has about the particular page
+site: - Restrict the results to those websites in the given domain
+allintitle: - Restricts the result to those websites with all of the search keywords in the title
+intitle: - Restrict the results to documents containing the search keyword in the title
+allinurl: - Restrict the results to those with all of the search keywords in the URL
+inurl: - Restrict the results to documents containing the search keyword in the URL
+location: - Find information for a specific location
+intext: - Restrict the results to documents containing the search keyword in the content
+Find more at ahrefs blog.
+
+WHOIS
+Whois databases are maintained by Regional Internet Registries and contain personal information of domain owner (eg.: email address).
+
+whois uses TCP port 43.
+
+Example on Linux:
+
+whois danielgorbe.com
+DNS footprinting
+DNS record types:
+
+A: Points to a host's IP address
+MX: Points to a domain's mail server
+NS: Points to a host's name server
+CNAME: Canonical naming allows aliases to a host
+SOA: Indicate authority for domain
+SRV: Service records
+PTR: Maps IP address to a hostname
+RP: Responsible person
+HINFO: Host information record includes CPU type and OS
+TXT: Unstructured text records
+Example on Linux:
+
+dig danielgorbe.com
+Traceroute
+Trace the path between you and your target computer.
+
+Example on Linux:
+
+traceroute danielgorbe.com
+
+
+Protocols
+These definitions is must-know !
+
+TCP (Transmission Control Protocol)
+UDP (User Datagram Protocol)
+ARP
+ICMP
+Ping Sweep: mass ICMP echo (ping) message
+SSDP
+DHCP
+DNS
+UPnP
+TCP Flags
+SYN: Initiates a connection between two hosts to facilitate communication
+ACK: Acknowledge the receipt of a packet
+URG: Indicates that the data contained in the packet is urgent and should process it immediately
+PSH: Instructs the sending system to send all buffered data immediately
+FIN: Tells te remote system about the end of the communication. In essence, this gracefully closes the connection
+RST: Reset a connection
+Three-way handshake
+Establish a TCP connection
+Computer1	Direction	Computer2
+SYN	->	
+<-	SYN+ACK
+ACK	->	
+OSI Model
+Layer	Name	Example protocols
+7	Application layer	HTTP, SNMP
+6	Presentation layer	MIME, ASCII
+5	Session layer	SOCKS, NetBIOS
+4	Transport layer	TCP, UDP
+3	Network layer	IP, ICMP
+2	Data link layer	MAC, ARP
+1	Physical layer	ethernet, Wi-Fi
+TCP/IP Model
+Layer	Name	Example protocols
+4	Application layer	HTTP, SNMP
+3	Transport layer	TCP, UDP
+2	Internet layer	IP, ICMP
+1	Link layer	ARP, MAC
+Scanning Techniques
+TCP Connect() / Full Open Scan
+Three-way handshake
+Completed connection
+Logged and detected
+Don't need ROOT
+nmap: -sT
+Open port:
+
+Attacker	Direction	Target
+SYN	->	
+<-	SYN+ACK
+ACK	->	
+RST	->	
+Closed port:
+
+Attacker	Direction	Target
+SYN	->	
+<-	RST
+Example:
+
+nmap -sT danielgorbe.com
+Stealth Scan / Half-Open Scan
+Half Three-way Handshake
+Nmap: -sS
+Open Port:
+
+Attacker	Direction	Target
+SYN	->	
+<-	SYN+ACK
+RST	->	
+Closed port:
+
+Attacker	Direction	Target
+SYN	->	
+<-	RST
+Example:
+
+nmap -sS danielgorbe.com
+Inverse TCP Flag Scanning
+Send TCP probe with TCP flags (i.e. FIN, URG, PSH, without flag)
+Xmas and Null scan
+Xmas Scan
+PSH+URG+FIN flag or ALL flag
+Create abnormal situation
+Nmap: -sX
+Open port:
+
+Attacker	Direction	Target
+FIN+URG+PSH	->	
+<-	No response
+Closed port:
+
+Attacker	Direction	Target
+FIN+URG+PSH	->	
+<-	RST
+Example:
+
+nmap -sX danielgorbe.com
+NULL Scan
+No flag
+Easy to detect
+Nmap: -sN
+Open port:
+
+Attacker	Direction	Target
+NULL	->	
+<-	No response
+Closed port:
+
+Attacker	Direction	Target
+NULL	->	
+<-	RST
+Example:
+
+nmap -sT danielgorbe.com
+FIN Scan
+FIN scan work with RFC-793 based TCP/IP (before Win XP)
+Only FIN flag
+Probably pass firewalls
+Nmap: -sF
+Open port:
+
+Attacker	Direction	Target
+FIN	->	
+<-	No response
+Closed port:
+
+Attacker	Direction	Target
+FIN	->	
+<-	RST
+Example:
+
+nmap -sF danielgorbe.com
+ACK Flag probe scanning
+Only ACK flag
+The response is always an RST
+Examine the RST header (i.e. TTL, WINDOW), the decide if port open or not
+Help identify filtering system: RST mean no firewall, No response mean there is a firewall
+Nmap: -sA
+Example:
+
+nmap -sA danielgorbe.com
+IDLE / IPID Header scan
+Remaining low profile
+Scanning done by a zombie
+Based on Full Open scan
+The unsolicited SYN+ACK packet is ignored or responded with RST
+Every IP packet has Fragment Identification Number (IPID)
+OS increment IPID for each packet
+Nmap: -sI <zombie host[:probeport]>
+Explanation on Nmap's website
+UDP Scan
+Connectionless protocol
+nmap: -sU
+Open port:
+
+Attacker	Direction	Target
+UPD Port probe	->	
+<-	No response
+Closed port:
+
+Attacker	Direction	Target
+UPD Port probe	->	
+<-	ICMP Port Unreachable
+Example:
+
+nmap -sA danielgorbe.com
+IDS / IPS evasion
+Packet fragmentation:
+Nmap: -f
+The IDS have to reassemble the packets to detect an attack
+Sending packet with delay
+Example:
+
+nmap -f danielgorbe.com
+OS Fingerprinting
+Active OS fingerprinting
+Nmap: -O
+Send TCP and UDP packets and observe the response from the host
+Example:
+
+nmap -O danielgorbe.com
+Passive OS fingerprinting
+Detail assessment of the traffic (TTL, TCP Window Size)
+Common values:
+OS	TTL	TCP Window Size
+Linux	64	5840
+Windows XP	128	65535
+Windows 2008	128	8192
+FreeBSD	64	5840
+More values here
+Banner Grabbing
+Determine the service
+Typically uses Telnet
+Example:
+
+nmap -sV danielgorbe.com
+Proxy
+System between the attacker and the target
+Hiding source IP address
+Impersonating
+Hide identity
+Proxy chaining
+Using multiple proxy server
+Most used proxy chains: Tor
+Spoofing IP address
+Modify packet header
+nmap has a decoy scan option, this option send packets with spoofed source IP to cloak the your address.
+Example:
+
+nmap -D 192.168.1.1,192.168.1.2 danielgorbe.com
+This option sends 3 packets with source IP:
+
+192.168.1.1
+192.168.1.2
+Your IP
+Detect Spoofing
+Direct TTL probe (on same subnet)
+IP Identification Number
+
+
+
+
+
+
+
+
+
+
+Basic
+initiates active connection with the target
+
+direct queries are generated
+
+enumerated information:
+
+routing information
+SNMP information
+DNS information
+machine name
+user information
+group information
+application and banners
+network sharing information
+network resources
+Email
+Extract useful information (username, domain, ..)
+Default password
+sometimes the default credentials didn't changed
+Active Directory (AD)
+Centralized command and control of domain users, computers, printers
+Brute force or generating queries to LDAP
+Ports:
+TCP / UDP 389
+Information from LDAP:
+Username
+Address
+Credentials
+Privileges information
+Lightweight Directory Access Protocol (LDAP)
+Accessing and maintaining distributed directory information services in a hierarchical and logical structure
+Allowing the sharing of information like user, system, network services, etc. throughout the network
+Provides a central place to store usernames and passwords
+Apps and services connect to LDAP to validate users
+Client initiates an LDAP session bt sending an operation request to Directory System Agent (DSA)
+Communication between client and server uses Basic Encoding Rules (BER)
+Port:
+TCP 389
+Directory services using LDAP:
+Active Directory
+Open Directory
+Oracle iPlanet
+OpenLDAP
+Simple Network Management Protocol (SNMP)
+Allow management of devices (routers, servers, ...)
+Manage network performance
+Find, troubleshoot, solve problems
+Design, plan for network growth
+Application layer protocol
+Ports:
+UDP 161
+UDP 162 (Trap)
+Three element: -SNMP manager: - A software running on the management station - Display collected information
+SNMP agent:
+A software running on the network nodes
+Different components are monitored (CPU, RAM, ...)
+Management Information Base (MIB):
+A collection of information organized hierarchically in a virtual database
+2 types:
+Scaler: single object instance
+Tabular: multiple related object instance
+Use default community strings or guess to extract information
+Community strings:
+Used for authentication
+Types:
+read-only (read only information from a device)
+read-write (read information, modify settings)
+trap
+SNMP Trap:
+Initiated by the SNMP agent
+Report an issue
+Information from SNMP:
+Host
+Devices
+Shares
+Network information
+Versions:
+v1:
+No support for encryption and hashing
+Plain text community string
+v2:
+No support for encryption and hashing
+Some function added (i.e. get data in bulk from agents)
+v3:
+Support encryption (DES)
+Support hashing (MD5 or SHA)
+3 model:
+NoAuthNoPriv: no encrypt and no hashing
+AuthNoPriv: no encrypt, just hashing
+AuthPriv: encryption + hashing used
+DNS Zone Transfer
+Zone transfer is a process to update DNS server, copy containing database record to another DNS server
+Ports:
+UDP 53 (DNS queries)
+TCP 53 (DNS Zone Transfer)
+Information from DNS zone transfer process:
+Locating DNS server
+DNS records
+Hostname
+IP address
+Username
+Tool:
+Linux: nslookup, dig, host
+Example:
+
+host -t axfr zonetransfer.me nsztm1.digi.ninja.
+Network Basic Input/Output System (NetBIOS)
+Allows communication between different application on different system within LAN
+Uses a 16 ASCII Character string to identify devices
+The initial 15 chars is identifying the device, the last char identify the service
+Session layer protocol
+Ports:
+UDP 137 (name services)
+UDP 138 (datagram services)
+TCP 139 (session services)
+Information from NetBIOS:
+List of machines within a domain
+File sharing
+Printer sharing
+Username
+Group information
+Password
+Policies
+NetBIOS names are classified into the following types:
+Unique
+Group
+Domain name
+Internet group
+Multihomed
+Tools: -Windows: nbtstat -Linux: nbtscan
+Network Time Protocol (NTP)
+Synchronize the clocks across the hosts and network devices
+A lot of services rely on clock settings (logging, login, ...)
+Application layer protocol
+Port:
+UDP 123
+Based on UTC
+Stratum:
+Distance between NTP server and device
+Like TTL
+Start from 1 and increases by every hop
+Attacker may change time to mislead forensic team, who investigate the events (change timestamp)
+Version 3 and above:
+Support a cryptographic authentication technique between NTP peers
+Without authentication, the client do not authenticate the server as a secure source, if the legitimate server goes down, a fake NTP server can replace the real
+Information from NTP:
+Host information
+Client information (IP, machine name, OS)
+Network information
+Tool:
+Linux: ntpdc, ntptrace, ntpq, nmap, wireshark
+Simple Mail Transfer Protocol (SMTP)
+Ensures mail communication between Email servers
+Application layer protocol
+Port:
+TCP 25 (Unencrypted)
+TCP 587 (TLS)
+Enumeration with Telnet
+Commands:
+HELO: identify domain name of the sender
+EXPN: verify Mailbox on localhost
+MAIL FROM: identify sender of the email
+RCPT TO specify the message recipients
+SIZE: specify maximum supported size
+DATA: define data
+RSET: reset connection and buffer of SMTP
+VRFY: verify the availability of Mail server
+HELP: show help
+QUIT: terminate session
+Countermeasures
+Advanced security softwares
+Updated version of protocols
+Strong security protocols
+Unique and difficult password
+Strong encrypted communications
+Disable unnecessary ports
+
+Vulnerability Assessment
+Vulnerability Assessment is a process of examination, discovery, and identification of a system and applications security measures and weakness. It helps to recognize the vulnerabilities that could be exploited, need of additional security layers, and information that can be revealed using scanners.
+
+Types of Vulnerability Assessment
+Active Assessments : actively sending requests to the live network and examining the the responses. It requires probing the target host.
+Passive Assessments : includes packet sniffing to discover vulnerabilities, running services, open ports, and others. It is a process without interfering the target host.
+External Assessment : find out vulnerabilities and exploit them from outside.
+Internal Assessment : find and exploit vulnerabilities in the internal network.
+Vulnerability Assessment Life-Cycle
+Creating baseline
+Identifies the nature of the network, the applications, and services.
+Creates an inventory of all resources and assets which helps to manage, prioritize the assessment.
+Helps to maps the infrastructure, learns about security controls, policies, and standards.
+Helps to plan the process effectively.
+Vulnerability Assessment
+Includes examination and inspection of security measures (physical security, security policies and controls, ...).
+The target is evaluated for misconfigurations, default configurations, faults, and other vulnerabilities.
+Probing each component individually or using assessment tools.
+The report shows the vulnerabilities, their scope, and priorities.
+Risk Assessment
+Scoping the identified vulnerabilities and their impact on the infrastructure
+Remediation
+Remedial actions for the detected vulnerabilities
+Start with the highest priority
+Verification
+Make sure that all vulnerabilities are eliminated
+Monitor
+Monitor the network traffic and system behaviors for any further intrusion
+Vulnerability Assessment Solutions
+Product based solution vs Service based solution
+Product based solutions are deployed within the network. Usually dedicated for internal network.
+Service based solutions are third-party solutions which offers security and auditing. This can be host either inside or outside the network. This can be a security risk of being compromised.
+Tree-based Assessment vs Inference-based Assessment
+Tree-based Assessment is the approach in which auditor follows different strategies for each component of an environment
+Inference-based Assessment is the approach to assist depending on the inventory of protocols in an environment
+Best Practice
+Know your tool, know everything about it
+Make sure to not cause any damage with the tool
+Make sure the source location of scan to reduce the focus area
+Run scan frequently
+Vulnerability Scoring System
+Common Vulnerability Scoring System (CVSS)
+None: 0.0
+Low: 0.1 - 3.9
+Medium: 4.0 - 6.9
+High: 7.0 - 8.9
+Critical: 9.0 - 10.0
+Common Vulnerabilities and Exposures (CVE)
+Another platform to find information about vulnerabilities
+
+Databases:
+
+https://nvd.nist.gov/
+https://cve.mitre.org/
+Vulnerability Scanning
+Vulnerability Scanners are automated utilities to detect vulnerabilities. These scanning tools perform deep inspection of scripts, open ports, banners, running services, configuration errors, etc...
+
+Top scanners:
+
+Nessus
+OpenVAS
+Owasp-ZED
+Vega
+Nexpose
+Retina
+GFI LanGuard
+
+Methodology
+Cracking Password
+Escalating Privileges
+Executing Applications
+Hiding Files
+Covering Tracks
+Goals
+Bypass the access control
+Gain access to the system
+Exploit vulnerabilities
+Gain privileges
+Execute applications
+Hide malicious activities
+Hide the evidence of compromising
+Password Cracking
+Three type of authentication factors:
+
+Something i have : username, password, ...
+Something i am : biometrics, ...
+Something i possess : allowed / registered devices, ...
+Password Cracking is the method for extracting the password to gain authorized access to the target system in the guise of a legitimate user. Usually, only the username and password authentication are configured, but now password authentication is moving toward two-factor authentication or multiple-factor authentication.
+
+A good password contain:
+
+Case sensitive letters
+Special characters
+Numbers
+Lengthy password (more than 8 character)
+Types of Password Attacks
+Non-Electronic Attacks
+Don't require any type of technical understanding and knowledge.
+
+Example:
+
+Shoulder surfing
+Social Engineering
+Dumpster Diving
+Active Online Attack
+Directly interact with the target for cracking password.
+
+Dictionary Attack
+A password cracking application is used along with with a dictionary file. This dictionary file contains entire dictionary or a list of known and common words. This is the most common type of password cracking. Systems are not vulnerable if they use a strong, unique alphanumeric password.
+
+Brute Force Attack
+Attempt to recover the password by trying every possible combination of characters until password is accepted. Common and basic technique.
+
+Hash Injection
+Compromising a workstation by exploiting the vulnerability, and extract the log-on hashes. Hashing and other cryptography knowledge require.
+
+Passive Online Attacks
+Password Attack without probing the target.
+
+Wire Sniffing
+Sniffing the packets with a packet sniffing tool within the Local Area Network (LAN), and inspecting the captured packets.
+
+Man-in-the-Middle (MITM) Attack
+The attacker involves himself into the communication, insert himself in.
+
+MITM Attacks:
+
+SSL Strip
+Burp Suite
+Browser Exploitation Framework (BeEF)
+Replay Attack : Capture the packets and extract information such as password from it. Then generating a replay traffic with the injection of extracted information to gain access to the system.
+
+Default Password
+Gain access to the system by using the preconfigured password. The default password can be find on the manufacturer site or through online tools.
+
+Offline Attack
+Pre-computed hashes and Rainbow table
+Comparing a password using a rainbow table. Rainbow Table is the pregenerated hashes of the words in a dictionary or the combination of characters. The advantage of Rainbow Table is the speed, because it takes less time to compare the hashes. The disadvantage is the time and storage, it takes much more time and storage to compute and store the hashes.
+
+Distributed Network Attack (DNA)
+Using the unused processing power of machines across the network to decrypt the hashes. DNA requires a DNA manager and DNS Clients. DNA Manager allocate small tasks over the distributed network to be computed in the background.
+
+Password Guessing
+The attacker uses the information extracted by initial phases and guess the password. Not common method and the rate of failure is high.
+
+USB Drive
+Attacker plug in an USB Drive that contain a password hacking tool. Windows Autorun feature allows running the application automatically, if enabled.
+
+Microsoft Authentication
+Authentication is a verification process to identify any user or device.
+
+Microsoft authentication protocols:
+
+Kerberos
+Security Account Manager (SAM)
+NT LAN Manager (NTLM)
+LM
+Security Account Manager (SAM)
+SAM is database that stores credentials and other account parameters such as passwords for the authentication process in Windows. While the OS running, this database is locked to be accessed by any other service and process. There are several other security algorithms that are applied to the database to secure and validate the integrity of data. Within Microsoft, SAM stores password in LM/NTLM hashing format. Windows XP and later versions do not store the value of LM hash, or when LM hash is exceeding 14 characters, it stores blank or dummy value instead.
+
+Format :
+
+Username: user ID: LM hash: NTLM hash:::
+Location:
+
+C:\windows\system32\config\SAM
+NTLM Authentication
+NT Lan Manager is a proprietary authentication protocol by Microsoft. In the authentication process, user sends login credentials to a domain controller in hashed format. Domain controller responds to a challenge known as nonce to be encrypted by the password's hash. This challenge is a 16 byte random number generated ny the domain controller. By comparing the challenge with the database, domain controller permit or deny the login. Microsoft upgraded its default authentication mechanism from NTLM to Kerberos.
+
+NTLM has two version:
+
+NTLMv1 (Older)
+NTLMv2 (Improved)
+For additional security layer, NTLM is combined with Security Support Provider.
+
+Kerberos
+Kerberos is an advanced authentication protocol. Clients receive tickets from Kerberos Key Distributor Center (KDC)
+
+KDC depend upon two components:
+
+Authentication Server (AS)
+Ticket-Granting Server (TGS)
+The client sends a request to the AS to grant Tick-granting-ticket. The AS authenticates the client by comparing the user identity and password from its datbase and reply with Tick-Granting Ticket and a session key. The session key is for a session between client and TGS. Now, the client can communicate with the Ticket-Granting Server (TGS). The client sends the TGT to TGS, asking for communication with another user. TGS reply with a Ticket and session key. Ticket and Session key is for communicating with other user within a trusted domain.
+
+Password salting
+Password salting is the process of adding additional character in the password to one-way function. This makes the password more difficult to reverse the hash. The function of salting is to defeat the Dictionary Attacks and Rainbow Table attacks.
+
+Password file by Operating Systems
+Windows: SAM (C:\windows\system32\config\SAM)
+Linux: Shadow (/etc/shadow)
+Domain Controller: NTDS:DIT
+Password Cracking tools
+pwdump7
+fgdump
+RainbowCrack
+Cain and Abel
+John The Ripper
+Pyrit
+Hashcat
+Password Cracking Countermeasures
+Change default password
+Do not store/save passwords in applications
+Do not use guessable passwords
+Set strong password
+Password encryption
+Keep credentials secure and secret
+Enable SYSKEY
+Password salting
+Advance security audits
+Periodically update passwords
+Monitor attacks
+Different password for each service
+Configure policies for incorrect password attempts
+Escalating Privileges
+The main goal is to get a high-level access to the system.
+
+Horizontal Privileges Escalation
+The attacker attempts to gain access to user that has same set of privileges.
+
+Vertical Privileges Escalation
+The attacker attempts to escalate privileges to a higher level. Vertical privileges occurs when attacker is trying to gain access to the Administrator account. Higher privileges allow attacker to access sensitive information, modify files and execute programs.
+
+Privilege Escalation using DLL Hijacking
+Applications need Dynamic Link Libraries (DLL) to run. In Windows, most of the application search for DLL in directories, instead of using the full qualified path. The Attacker replace the DLL to a malicious one.
+
+DLL Hijacking tool: Metasploit
+
+Known DLLs are specified in the registry key:
+
+HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\
+Search paths used by Microsoft:
+
+Directory of application or current directory
+System directory (i.e. C:\Windows\System32)
+Windows directory
+Executing Applications
+The Attacker's next step is to execute malicious applications. This execution is for gaining access to system resources, crack passwords, set up backdoors and many more. This process is called as "System Owning".
+
+Goals:
+
+Install malware to collect information
+Setup Backdoor to maintain access
+crack passwords and scripts
+Install Keylogger
+etc...
+RemoteExec
+RemoteExec is software designed for installation of application, execution of code and scripts remotely. RemoteExec can upload file across the network.
+
+Features:
+
+Deploy packages
+Remotely execution of programs
+Scheduling execution
+Remote configuration (settings, files, ...)
+Remote controlling (turn off, lock, ...)
+PDQ Deploy
+PDQ Deploy is a software for system administrators to install and send updates silently to the remote systems. It can silently deploy almost every application (.exe, .msi, ...). It can install, uninstall, copy, execute and send files.
+
+Keyloggers
+Keystroke logging, keylogging and keyboard capturing is a process of monitoring and/or recording the actions by any user. Logging the actions to steal information from the target machine.
+
+Goals:
+
+Capture the pushed buttons
+Take screenshots
+Capture mouse
+Many more...
+Software Keyloggers
+Software-based keyloggers are remotely installed, or send it to the target to execute the application.
+
+Types:
+
+Application keyloggers
+Kernel keyloggers
+Hypervisor-based keyloggers
+Form Grabbing based keyloggers
+Hardware Keyloggers
+It is a physical hardware which are installed on hardware by physically accessing the device.
+
+Types:
+
+PC/BIOS Embedded keyloggers
+Keylogger keyboard
+External keylogger (video, bluetooth, wi-fi, acoustic, ...)
+Anti-Keyloggers
+Anti-Keylogger is an application which ensures protection against keylogging by providing SSl protection, keylogging protection, clipboard logging protection and screen logging protection.
+
+Anti-Kelogger softwares:
+
+Zemana
+Spyshelter Anti-keylogger
+Anti-Keylogger
+Key-logging Countermeasures
+Keystroke interference software
+Don't click on doubtful URLs
+Anti-Keylogger software
+On-Screen keyboard for secrets
+Physical monitoring
+Host-based IDS
+File scanning prior to installation
+Spyware
+Spywares are the software designed for gathering user interaction information with a system such as login credentials, emails and many more without informing the user of the system. The gathered information is sent to a remote destination. Spyware hides its files and processes to avoid detection.
+
+Types:
+
+Adware
+System monitors
+Tracking cookies
+Trojans
+Features:
+
+Tracking users (i.e. keylogging)
+Monitor user's activity
+Blocking services
+Remote delivery of logs
+Email tracking
+Record removable media communication (i.e. USB)
+Voice recording
+Video recording
+Tracking location (GPS)
+Mobile tracking
+Rootkits
+Rootkit is a software designed to provide privileged access to a remote user over a system, creates a backdoor. Deployed after attacker gain high-level access to a system. Rootkits often mask their existence to avoid detection.
+
+Types
+Application level rootkit: perform manipulation of standard application file with an injection of codes.
+Kernel-level rootkit: inject malicious code to the kernel
+Hardware/Firmware level rootkit: built into a chipset
+Hypervisor level rootkit: exploits hardware features like AMD-V or Intel VT
+Boot Loader level rootkits (Bootkits): replace the legitimate boot loader with the malicious one, which enables the bootkit to activated before an OS run. It can attack Master Boot Record (MBR), Volume Boot Record (VBR) or boot sector. It can be used to attack full disk encryption systems, hack encryption keys and passwords.
+Tool
+Avatar
+Necurs
+Azazel
+ZeroAccess
+Detecting and Defending Rootkits
+Integrity-Based Detection
+Digital signatures
+Difference-based detection
+Behavior-based detection
+Cross-view based detection
+Run-time execution path profiling
+Anti-rootkit software
+Deploying a network-based firewall
+Host-based firewall
+Install application/OS from trusted sources
+Integrity verification
+Kernel memory dump analysis
+Unix tools:
+
+Zeppo
+chrootkit
+Windows tools:
+
+Microsoft Sysinternals Rootkit Revealer
+Sophos Anti-Rootkit
+New Technology File System (NTFS) Data Stream
+NTFS is a Windows file system by Microsoft. NTFS is the default file system for Windows 10,- 7,- Vista,- XP,- 2000,- NT.
+
+Alternate Data Stream (ADS)
+ADS is a file attribute in in NTFS file system, contains metadata for locating a particular file. ADS is capable of hiding file data into an existing file without altering or modifying any noticeable changes. It can be security threat because it can hide malicious files.
+
+NTFS Streams Countermeasures:
+
+Moving file to a FAT partition (FAT doesn't support ADS, but this will corrupt the file)
+Third-party tools (ADS Spy, ADS Tools, LADS, ...)
+Steganography
+Steganography is a technique for hiding sensitive information in an ordinary message to ensure the confidentiality. Steganography uses encryption to maintain the confidentiality and integrity. It hides the encrypted data to avoid detection. An attacker may use this to technique to transfer data without being detected.
+
+Classification of Steganography
+Technical Steganography includes concealing information using methods like using invisible link, microdots.
+Linguistic Steganography uses text as covering media to hide information like using ciphers and code to hide information.
+Types of Steganography
+Whitespace Steganography
+Image/Pixel Steganography
+Document Steganography
+Video Steganography
+Audio Steganography
+File/Folder Steganography
+Spam/Email Steganography
+Web Steganography
+Frequency Steganography
+Least Significant Bit Steganography
+Whitespace Steganography
+Hide information in a text file using extra blank space inserted in between words covering file. Using LZW and Huffman compression method to decrease the size of the message.
+
+Image Steganography
+Hidden information can be kept in image formats, such as PNG, JPG, others. Image steganography places redundant bits of the image in the message. It cannot be detected by human eye.
+
+Techniques:
+
+Least significant bit insertion
+Masking and filtering
+Algorithm and transformations
+Tools:
+
+OpenStego
+QuickStego
+Stegohide (Linux)
+Steganalysis
+Analysis of suspected information using steganography techniques to discover and retrieve the hidden information.
+
+Methods:
+
+Stego-only: have only stego object
+Known stego: have stego object, algorithm and cover
+Known message: have stego object and hidden message
+Known cover: have stego object and cover
+Chosen message: generate stego form known message to identify the algorithm
+Chosen stego: have stego object and algorithm
+Covering tracks
+After gaining access, escalating privileges, executing applications, the next step is to wipe the evidence. In this phase, attacker removes all the event logs, error messages and other evidence to prevent its attack from being discovered easily.
+
+Common techniques:
+
+Disable auditing
+Clearing logs
+Manipulating logs
+Disable auditing
+Preventing another security mechanism to indicate an alert of any sort of intrusion, and leaving to track leaving to track on the machine. The best practice for leaving no track and prevent detection is by disabling the auditing as you logged in on the system. It will not only prevent to log events, but also resist in the detection. Auditing in a system is enabled to detect and track events.
+
+List auditing categories in windows:
+
+C:\Windows\system32>auditpol /list /category /v
+Check all category audit policies:
+
+C:\Windows\system32>auditpol /get /category:*
+Clearing logs
+By clearing logs, all events logged during the compromise will be erased.
+
+Folder of log files:
+
+Windows 2000/Server2003/Windows XP:
+
+%SystemRoot%\System32\Config
+Server 2008/Vista and up:
+
+%SystemRoot%\system32\winevt\logs
+Linux, OpenBSD:
+
+/var/log/
+Other methods
+Clear cookies
+Clear cache
+Clear temporary files
+CCleaner
+
+Basic
+Malware = Malicious Software Malware defines a wide variety of potentially harmful software.
+
+Malware propagation ways
+Free software (crack files, ...)
+File sharing services: during the transfer, the file can be infected (torrent, ...)
+Removable media (firmware embedded malware, ...)
+Email (attachment, ...)
+Not using firewall or anti-virus
+Trojan
+Misleads from its true intention and wait for the best time to attack. Typically spread by social engineering.
+
+Most common use:
+
+Create back door
+Gaining unauthorized access
+Steal information
+Infect connected devices
+Ransomware attacks
+Using victim as botnet
+Download other malicious software
+Disable security
+Trojan infection process
+Creating trojan
+Create a dropper
+Create a wrapper
+Propagate the trojan
+Execute dropper
+Trojan Construction Kit allow attacker to create their own trojan. Trojans created by using construction kits can avoid detection from virus and trojan scanning.
+
+Trojan construction kits:
+
+Dark Horse trojan virus maker
+Senna Spy Generator
+Trojan Horse Construction Kit
+Progenic mail Trojan Construction Kit
+Pandora's Box
+Droppers
+Dropper is a program that is designed to deliver a payload on the target machine, install the malware without being detected.
+
+Tools:
+
+Win32/Rotbrow.A
+Win32/Swisyn
+Win32/Meredrop
+Troj/Destover-C
+Wrappers
+Wrapper binds malicious file in order to create and propagate the trojan along with it to avoid detection. Wrappers often popular executable files, like games, music, etc.
+
+Crypter
+The basic purpose is to encrypt, obfuscate and manipulate the malware. By using crypter, it becomes more difficult to detect. Crypter is used while creating the trojan.
+
+Tools:
+
+Cryogenic Crypter
+Heaven Crypter
+Swayz Cryptor
+Deployment of trojan
+An attacker is upload the trojan on a server, where it can be downloaded immediately when the victim clicks on the link
+
+Types of trojans
+Command Shell Trojans
+Command Shell Trojans provide a remote control of command shell (i.e. open a port for Netcat)
+Defacement Trojans
+Defacement Trojans allow attacker to view, edit and extract information, for example User-Styled Custom Application
+HTTP/HTTPS Trojans
+HTTP/HTTPS Trojans create a http/https tunnel to communicate
+Botnet trojans
+Botnet is a large scale of compromised system, they spread over the world
+Botnets controlled by Command and Control Center
+Used to launch distributed attacks, like DDoS, spamming
+Proxy Server Trojans
+Proxy Server Trojans turns the compromised system into a proxy server
+Attacker use this to hide the actual source of the attack
+Remote Access Trojans (RAT)
+RAT allows the attacker to get remote desktop access to the victim's computer
+RAT includes a back door to maintain the access and control over the victim
+Attacker can monitor user, access information, alter files, etc...
+Tools
+SSH-R.A.T.
+BlackHole RAT
+Pandora RAT
+Other Types of Trojans
+FTP Trojans
+VNC Trojans
+Mobile Trojans
+ICMP Trojans
+Covert Channel Trojans
+Notification Trojans
+Data Hiding Trojans
+Trojan Countermeasures
+Avoid to click on suspected email attachments
+Block unused ports
+Monitor network traffic
+Avoid download from untrusted sources
+Install / update security softwares and anti-viruses
+Scan removable media before use
+File integrity
+Enable auditing
+Configure host-based firewall
+Intrusion detection software
+Detection Techniques for Trojans
+Scanning for suspicious network activities
+Scanning for suspicious ports
+Scanning for suspicious registry entries
+Scanning for suspicious Windows services
+Scanning for suspicious start-up programs
+Scanning for suspicious files and folders
+Scanning for suspicious processes
+Virus and Worms
+Viruses
+The virus is a self-replicating program, it is capable of producing multiple copies by attaching with another program.
+
+Characteristics of viruses:
+
+Infecting other files
+Alteration of data
+Corruption
+Encryption
+Self-replication
+Stages of Virus Life
+Design: develop virus from scratch or using construction kits
+Replication: after the virus is deployed, it will start to spread itself
+Launch: user accidentally launch the infected program
+Detection: the behavior of a virus is observed, the virus is identified
+Incorporation: developers design a defensive code
+Elimination: update the anti-virus, virus eliminated
+Working of Viruses
+Infection Phase
+During infection phase, virus planted on a target system, replicate itself onto an executable file. It can be launched when user execute an infected program. These viruses spread by reproducing and infecting programs, documents or email attachments. They can enter the operating system through removable drives or any digital media.
+
+Attack Phase
+File is executed accidentally by user. Normally, viruses require a triggering action to infect, but they can also have configured to infect upon certain predefined conditions.
+
+Types of Viruses
+System or Boot Viruses: move actual Master Boot Record (MBR) from its actual location, the virus responds from the original location of MBR when the system boots, it executes the virus first.
+File Viruses: infect executable files or BAT files.
+Multipartite Viruses: infect boot sector and files simultaneously.
+Macro Viruses: designed for Microsoft Office and other application using Visual Basic for Application (VBA).
+Cluster Viruses: designed to attack and modify the file location table or directory table.
+Stealth/Tunneling Viruses: to evade detection, stealth virus employs tunnel technique to launch under anti-virus via a tunnel and intercepting request from Operating System Interruptionhandler.
+Logic Bombs: designed to remain in waiting state until a predetermined event occurs, then payload detonate and perform its intended task, difficult to detect, difficult to detect.
+Encryption Virus: uses encryption to avoid detection, use new encryption to encrypt and decrypt the replica.
+Ransomware
+Ransomware is a malware program which restricts the access to the system files and folders by encrypting them. Some type of ransomware may lock the system as well. Attacker demands ransom to provide the decryption key. Ransomware is deployed using trojans. Example: WannaCry
+
+Types:
+
+Cryptobit Ransomware
+CryptoLocker Ransomware
+CryptoDefense Ransomware
+CryptoWall Ransomware
+Police-themed Ransomware
+Others:
+
+Metamorphic Viruses
+File Overwriting or Cavity Viruses
+Sparse Infection Viruses
+Companion/Camuflage Viruses
+Shell Viruses
+File Extension Viruses
+Add-on and Intrusive Viruses
+Transient and Terminate and Stay Resident Viruses
+Virus generating tools
+Sam's Virus Generator
+JPS Virus Maker
+Sonic Bat
+Worms
+Worms can replicate themselves but cannot attach themselves. It has the capability to travel without human action. The worm can propagate using file transport and spread across the infected network which virus is not capable of.
+
+Analysis and Detection Methods
+Scanning: the suspected file is scanned for the signature string
+Check: the entire disk is checked for integrity, integrity checker records integrity of all files by calculating checksum usually
+Interception: request from operating system is monitored, emulation and heuristic analysis include behavior analysis and code analysis by executing it in a sophisticated environment
+Malware Reverse Engineering
+Sheep Dipping
+The analysis is performing on a dedicated computer, along with port monitoring, anti-viruses and other security programs.
+
+Malware Analysis
+The process of identification of a malware until its verification that the malware is completely removed, including observing the behavior of malware, scoping the potential threat to a system and finding other measures.
+
+Process:
+
+Creating the testbed: use a virtual machine as a host operating system where malware analysis is performed by executing the malware, this virtual machine is isolated from the network, creating a quarantine with it
+Static and Dynamic malware analysis: observe the behavior, using process monitoring tools, packet monitoring tools and debugging tools, later the network connection is also set up
+Goals of Malware Analysis
+Diagnostics of threat severity or level of attack
+Diagnostics of the type of malware
+Scope the attack
+Build defense to secure networks and systems
+Finding root cause
+Built incident response actions
+Develop anti-malware to eliminate
+Types of Malware Analysis
+Static Analysis or Code Analysis
+Disassemble the binary file, fragmenting the resources, without executing it and study each component.
+
+Dynamic Analysis or Behavioral Analysis
+Execute the malware and observing its behavior. These analysis are performed in a sandbox environment. Sandboxing technology helps analysis in a dedicated manner in a sophisticated environment. During the sanboxing of the malware, it is searched in the intelligence database for the analysis report. The diagnose is recorded for future use, helps to respond faster.
+
+© 2020 GitHub, Inc.
+Terms
+Privacy
+Security
+Status
+Help
+Contact GitHub
+Pricing
+API
+Training
+Blog
+About
+
+Basic
+With sniffing, you can monitor all sorts of traffic either protected or unprotected. Sniffing is the process of scanning and monitoring of the captured data like DNS traffic, web traffic and many more by enabling the promiscuous mode on the network interface. The attacker can reveal information from it such as usernames and passwords. Anyone within the same LAN can sniff the packets.
+
+Working of Sniffers
+In the process of sniffing, the attacker gets connected to the target network to start sniffing. Sniffers turns Network Interface Card (NIC) into promiscuous mode. Promiscuous mode is a mode of the interface in which NIC respond for every packet it receives. The attacker decrypt the packets to extract information.
+
+Concept:
+
+Switch maintain its MAC table to validate the connected hosts
+Attacker alter this table with Port Mirroring, Switched Port Analyzer (SPAN) and many other techniques
+All packets copied to the attacker
+Switch vs Hub
+Switch forward broadcast and multicast to all ports, but forward unicast packets to a specific port.
+Hub transmits all packets to all ports.
+Types of Sniffing
+Passive Sniffing
+There is no need of sending additional packet or interfering the device, for example when connected to a hub.
+
+Active Sniffing
+Attacker has to send additional packets to the connected device to start receiving packets.
+
+Techniques:
+
+MAC Flooding
+DHCP Attacks
+DNS Poisoning
+Switch Port Stealing
+ARP Poisoning
+Spoofing
+Hardware Protocol Analyzer
+A hardware or software that analyze the captured packets and signals over the transmission channel. Hardware Protocol Analyzers are the physical equipment which is used to capture without interfering the network traffic. A major advantage of this hardwares are the mobility, flexibility and throughput.
+
+Hardware Protocol Analyzer can:
+
+Monitor network usage
+Identify traffic
+Decrypt packets
+Extract information
+Seize packet
+Switch Port Analyzer (SPAN) Port
+In other name: Port Mirroring
+
+It is used on a network switch to send a copy of network packets seen on one switch port (or an entire VLAN) to a network monitoring connection on an other switch port.
+
+Wiretapping
+Gaining information by tapping the signal from wire such as telephone lines or the internet. Wiretapping mostly performed by a third party. Legal Wiretapping is called legal interception which is mostly performed by governments or security agencies.
+
+Active Wiretapping
+Monitoring and recording the information with alteration of the communication.
+
+Passive Wiretapping
+Monitoring and recording the information without any alteration in the communication.
+
+Lawful Interception
+Wiretapping with legal authorization which allows law enforcement agencies to wiretap the communication of user.
+
+Telecommunication standardization organization standardized the legal interception gateways for the interception of communication by agencies.
+
+Planning tool for Resource Integration, Synchronization, and Management (PRISM)
+PRISM is a tool designed to collect information and process that passing through American servers. Developed by Special Source Operation (SSO) division of National Security Agencies (NSA). PRISM is intended for identifying and monitoring of suspicious communication. Internet traffic routing through the US, or data stored on a US server are wiretap by NSA.
+
+Sniffing Countermeasures
+HTTPS instead of HTTP
+SFTP instead of FTP
+Switch instead of Hub
+Port security
+DHCP Snooping
+Dynamic ARP inspection
+Source guard
+Sniffing detection tool
+Strong encryption protocol
+Detection:
+Ping method
+ARP method
+Promiscuous port detection
+MAC Attacks
+Media Access Control (MAC) is the physical address of a device. MAC address is a 48-bit unique identification number that is assigned to a network device for communication at data-link layer (layer 2). First 24 bits are the Object Unique Identifier (OUI), the last 24 bits are the Network Interface Controller (NIC).
+
+MAC Address Table / CAM Table
+MAC address table or Content-Addressable Memory table is used in ethernet switches to record MAC address, and it's associated information which is used to forward packets.
+
+The switch observe the incoming frames and records the source MAC of the frames in it's MAC address table. It also records the specific port for the source MAC address. Based on this, switch can make intelligent frame forwarding. Switch removes MAC from the table after switch not seen it for a while.
+
+MAC Flooding
+Attacker sends random MAC addresses mapped with random IP to overflow the storage capacity of CAM table. CAM table has a fixed length, so when filled, switch act as a hub, broadcast every packet on every port, help attacker to sniff packets.
+
+Linux tool:
+
+macof
+Switch Port Stealing
+This technique base on MAC flooding, the attacker send bogus ARP packets with the source MAC address of the target and destination address of its own. The switch update the CAM table because of it.
+
+If the attacker send a bogus ARP packet immediately after the target packet, the attacker will get the respond instead of the target.
+
+Defending against MAC Attacks
+Port Security is used to bind MAC address of known devices to the physical ports and violation action is also defined.
+
+DHCP Attacks
+Dynamic Host Configuration Protocol (DHCP)
+DHCP is the process of allocating the IP address dynamically so these addresses are assigned automatically and they can be reused when hosts don't need them. Round Trip Time is the measurement of time from discovery of DHCP server until obtaining the leased IP address.
+
+IPv4 DHCP process
+By using UDP broadcast, DHCP client sends an initial DHCP-Discovery packet.
+The DHCP server reply with a DHCP-Offer packet, offering the configuration parameters.
+The DHCP client send back a DHCP-Request packet destined for DHCP server for requesting the DHCP parameters.
+Finally, the DHCP server send the DHCP-Acknowledgement packet containing configuration parameters.
+CLIENT		SERVER
+DHCP-Discovery	->	
+<-	DHCP-Offer
+DHCP-Request	->	
+<-	DHCP-Acknowledgement
+Ports:
+UDP port 67 for Server
+UDP port 68 for Client
+IPv6 DHCP process
+CLIENT		SERVER
+Solicit	->	
+<-	Advertise
+Request	->	
+<-	Reply
+Ports:
+UDP port 546 for Client
+UDP port 547 for Server
+DHCP Relay is needed when the DHCP server is not on the same subnet, because routers do not forward any broadcast IP packet to interfaces. DHCP Relay Agent allows DHCP messages to be exchanged between the DHCP client and the DHCP server residing on different subnet. DHCP Option 82 allows Agents to insert circuit specific information into a request that is being forwarded to a DHCP server.
+
+DHCP Starvation Attack
+DHCP Starvation Attack is a Denial-of-Service attack on a DHCP server. Attacker send bogus requests to DHCP server with spoofed MAC address to lease all IP address in DHCP address pool. Once all IP address is allocated, upcoming users will be unable to obtain IP address or renew the lease.
+
+Tools:
+
+Dhcpstarv
+Yersinia
+Rogue DHCP Server
+Attacker deploy the rogue DHCP server in the network along with the DHCP starvation attack. When legitimate DHCP server is in Denial-of-Service attacks, DHCP clients are unable to gain IP address from the legitimate DHCP server. Upcoming DHCP Discovery (IPv4) and Solicit (IPv6) are replied by the bogus DHCP server with configuration parameter which directs the traffic towards it.
+
+Defending against DHCP Starvation and Rogue Server Attack
+DHCP Snooping
+DHCP snooping feature identify the only trusted ports from DHCP traffic. Any access port who tries to reply the DHCP request will be ignored.
+
+Port Security
+Limit the learning number of a maximum number of MAC addresses on a port
+Configure violation action, aging time, ...
+ARP Poisoning
+Address Resolution Protocol (ARP)
+The Address Resolution Protocol (ARP) is a communication protocol used for discovering the link layer address, such as a MAC address, associated with a given internet layer address, typically an IPv4 address. By broadcasting the ARP request with IP address, the switch can learn the associated MAC address information from the reply of the specific host. If there is no map, or map is unknown, the source will send a broadcast to all node.
+
+ARP Spoofing Attack
+Attacker send forged ARP packets over Local Area Network (LAN). In this case, switch will update the attacker's MAC address with the IP address of a legitimate user or server, then start forwarding the packets to the attacker. Attacker can steal information by extracting it from packets.
+
+ARP Poisoning used for:
+
+Session hijacking
+Denial-of-Service attacks
+Man-in-the-Middle attacks
+Packet sniffing
+Data interceptions
+VoIP tapping
+Connection resetting
+Stealing passwords
+Defending ARP Poisoning
+Dynamic ARP Inspection (DAI)
+DAI is used with DHCP snooping, IP-to-MAC bindings can be tracked from DHCP transactions to protect against ARP poisoning.
+
+Spoofing Attacks
+MAC Spoofing/Duplicating
+Manipulating the MAC address to impersonate the legitimate user or launch attack such as DoS. Attacker sniffs the MAC address of users which are active on switch ports and duplicate the MAC address. This can intercept the traffic and traffic destined to the legitimate user may direct to the attacker.
+
+Defend against MAC Spoofing
+DHCP Snooping
+Dynamic ARP Inspection
+Source Guard: monitor and prevent the host to impersonate another host
+DNS Poisoning
+Domain Name System (DNS)
+DNS is used in networking to translate human-readable domain names to IP address. When DNS Server receives the request, it doesn't have the entry, it generates the query to another DNS Server for the translation and so on. DNS server having the translation will send back the IP address.
+
+DNS Poisoning Techniques
+When DNS server receives a false entry, it updates its database. To increase performance, DNS servers maintain a cache in which this entry is updated to provide quick resolution of queries. This false entry causing poison in DNS translation until the cache expires.
+
+Intranet DNS Spoofing
+Normally performed over Local Area Network (LAN) with switched network. With the help of ARP poisoning, attacker sniff packet, extract the ID of DNS requests and reply with fake IP translation directing traffic to the malicious site.
+
+Internet DNS Poisoning
+Attacker replace the DNS configuration on the target machine.
+
+Proxy Server DNS Poisoning
+Attacker replace the DNS configuration of the web browser.
+
+DNS Cache Poisoning
+Attacker exploiting flaws in DNS software, adds or alter the entries.
+
+Defending Techniques against DNS Poisoning
+Segregate authoritative and recursive resolver
+Query and response verification using DNS Guard
+Restrict external DNS lookup
+Prevent DNS Open Resolver configuration
+Transaction ID randomization
+DNS application inspection configuration
+DNS resolver
+IP Source Guard
+IDS deployment
+Disable recursion
+DNS non-existent domain rate limiting
+Uni-Cast path forwarding
+UDP source port randomization
+DNSSEC
+Sniffing Tools
+Wireshark
+Filters in Wireshark:
+
+== Equal
+eq Equal
+!= Not equal
+ne Not equal
+contains Contains specified value
+Defending Against Sniffing
+HTTPS instead of HTTP
+SFTP instead if FTP
+Switch instead if Hub
+Port security
+DHCP Snooping
+Dynamic ARP Inspection
+Source guard
+Sniffing detection tools
+Strong encryption protocol
+Sniffing Detection Technique
+Ping Method
+A ping is sent to the suspect IP address with spoofed MAC. If the NIC is not in promiscuous mode, it will not it will not respond.
+
+ARP Method
+First, sending non broadcast ARP packet to the suspect, MAC address will be cached if the NIC is in promiscuous mode.
+
+Second, send a broadcast with spoofed MAC, if NIC is in promiscuous mode, it will be able to reply the packet only as it has already learned the actual MAC from sniffed non-broadcast ARP packet.
+
+Basic
+Social engineering is an act of stealing information from humans.
+
+No interaction with target system or network
+Non-technical attack
+Convincing the target to reveal information
+One of the major vulnerability which leads to this type of attack is "Trust". User trust in another user and does not secure their credentials from them.
+
+Employees are uneducated at organizations, so this is a major vulnerability.
+
+Lack of security policies and privacy are also vulnerable.
+
+Steps of Social Engineering
+Research
+Collection of information from the target organization
+Collected by dumpster diving, scanning, search on the internet, ...
+Select target
+Select the target among other employees
+A frustrated target is more preferred
+Relationship
+Create relationship with the target
+Earn the trust
+Exploit
+Collecting sensitive information such as usernames, password, etc...
+Social Engineering Techniques
+Types of Social Engineering
+Human-based Social Engineering
+One-to-one interaction with the target. Earn the trust to gather sensitive information from the target.
+
+Impersonation
+Pretend to be something or someone, pretending to be a legitimate user or authorized person. Impersonation is performed by identity theft.
+
+Eavesdropping and Shoulder Surfing
+Eavesdropping is a technique in which attacker is revealed information by listening to the conversation. Reading or accessing any source of information without being notified.
+
+Shoulder Surfing is a method of gathering information by standing behind the target.
+
+Dumpster Diving
+Looking for treasure in trash.
+
+Reverse Social Engineering
+The attacker convinces the target of having a problem or might have in the future to get sensitive information.
+
+Piggybacking and Tailgating
+Piggybank is a technique in which attacker waits for an authorized person to gain entry in a restricted area. Tailgating is a technique in which attacker gains access to the restricted area by following the authorized person.
+
+Computer-based Social Engineering
+Phishing
+Attacker send fake emails which looks like legitimate email. When recipient opens the link, he is enticed for providing information.
+
+Spear Phishing
+Similar as phishing but it is focused on one target. Because of this, it is generate higher response rate.
+
+Mobile-based Social Engineering
+Publishing Malicious Apps
+These applications are normally a replica or similar copy of a popular application.
+
+Repackaging Legitimate Apps
+Repack a legitimate app with a malware.
+
+Fake Security Apps
+Attacker develop a fake security app.
+
+Insider Attack
+Social Engineering is not all about a third person gathering information, it may be an insider with privileges.
+
+Impersonation on Social Network Sites
+Social Engineering Through Impersonation on Social Network Sites
+Attacker gathers personal information of a target from different sources mostly from social network sites such as full name, date of birth, email address, residential address, etc. After gathering the information, the attacker create an account that is exactly the same. Then introduced to friends, group joined by the target to get updates or convince the target's friends to reveal information.
+
+Risks of Social Network in a Corporate Networks
+Social network sites is not secured enough as a corporate network secures the authentication. The major risk of social network is its vulnerability in the authentication. The employee while communicating on social network may not take care of sensitive information.
+
+Identity Theft
+Stealing the identification information of someone
+Popularly used for frauds
+Prove the fake identity to take advantage of it
+Process
+Gathering information: full name, address, contacts, accounts, birth information, bill from social networks, dumpster diving, etc...
+Fake identity proof: get fake IDs (driving licence, ID card, etc...)
+Fraud: spend money, unauthorized access, use ID for frauds, etc...
+Countermeasures
+Security of sensitive information
+Physical security
+Rotational duties
+Monitoring
+Controlled access
+Least privileges
+Strong policies
+Training
+Bio-metric authentication
+Audit
+Awareness
+Tools
+social engineering toolkit (linux)
+
+Basic
+Denial-of-Service is type of attack on which service offered by a system or a network is denied. Service may either be denied, reduce the functionality or prevent the access.
+
+Symptoms of DoS attack:
+Slow performance
+Increase in spam email
+Unavailability of a resource
+Loss of access to a website
+Disconnection of a wireless or wired internet connection
+Denial of access to any internet services
+Distributed Denial of Service (DDoS)
+In DDoS, multiple compromised systems are involved to attack a target.
+
+The attacker send several connection request to the server with fake return address, so the server can't find a user to send the connection approval. The authentication process waits for a certain time to close the session. The attacker is continuously sending requests which causing a number of open connection on the server that lead to a denial of service.
+
+Categories of DoS/DDoS Attacks
+Volumetric Attacks
+Denial of Service attack performed by sending a high amount of traffic towards the target. Volumetric attack are focused on overloading the bandwidth capability.
+
+Fragmentation Attacks
+DoS attacks witch fragment the IP datagram into multiple smaller size packets. It requires to reassembly at the destination which requires resources of routers.
+
+Types:
+
+UDP and ICMP fragmentation attacks
+TCP fragmentation attacks
+TCP-State-Exhaustion Attacks
+TCP-State-Exhaustion Attacks are focused on web servers, firewalls, load balancers and other infrastructure component to disrupt connections by exhausting their finite number of concurrent connections.
+
+Most common state-exhaustion attack is ping of death.
+
+Application Layer Attacks / Layer 7 DDoS
+The application level attack overloads the particular service of a website or application.
+
+DoD/DDoS Attack Techniques
+Bandwidth Attacks
+Bandwidth attack requires multiple sources to generate q request to overload the target. The goal is to consume the bandwidth completely.
+
+Zombie servers or Botnets used to perform this type of attack.
+
+Service Request Floods
+Attacker flood the request towards a web service or server until it is overloaded.
+
+SYN Attack / Flooding
+The attacker sending a lot of SYN request to tying up a system. The victim waits for the acknowledgement from the IP address, but there will be no response because the source address is spoofed. This waiting period ties up a connection "listen to queue", that can tie up for 75 seconds.
+
+ICMP Flood Attack
+Flooding ICMP request without waiting for the response overwhelm the resource of the network device.
+
+Peer-to-Peer Attacks
+Exploit bugs in peer-to-peer servers using Direct Connect (DC++). Using one or more malicious hosts in a peer-to-peer network to perform the attack.
+
+Permanent DoS Attack (PDoS)
+Permanent DoS attack is focused on hardware sabotage, cause irreversible damage to the hardware. Affected hardware require replacement or reinstall the software.
+
+Methods:
+
+Phlashing
+Bricking a system : sending fraudulent hardware updates
+Application Level Flood Attacks
+Attacker finds the fault and flaws in an application or operating system and exploits the vulnerability to gain control over a system.
+
+Distributed Reflection Denial of Service (DRDoS)
+Attacker uses an intermediary victim which redirect the traffic to a secondary victim. Secondary victim redirects the traffic to the target. The intermediary and secondary victim is used for spoofing the attack.
+
+Botnet
+Attacker compromises victims to make bot, which compromise other system to create a botnet. These botnets are controlled by Command and Control server owned by the attacker. This server is used to send instructions to perform the attack.
+
+
+
+asic
+Denial-of-Service is type of attack on which service offered by a system or a network is denied. Service may either be denied, reduce the functionality or prevent the access.
+
+Symptoms of DoS attack:
+Slow performance
+Increase in spam email
+Unavailability of a resource
+Loss of access to a website
+Disconnection of a wireless or wired internet connection
+Denial of access to any internet services
+Distributed Denial of Service (DDoS)
+In DDoS, multiple compromised systems are involved to attack a target.
+
+The attacker send several connection request to the server with fake return address, so the server can't find a user to send the connection approval. The authentication process waits for a certain time to close the session. The attacker is continuously sending requests which causing a number of open connection on the server that lead to a denial of service.
+
+Categories of DoS/DDoS Attacks
+Volumetric Attacks
+Denial of Service attack performed by sending a high amount of traffic towards the target. Volumetric attack are focused on overloading the bandwidth capability.
+
+Fragmentation Attacks
+DoS attacks witch fragment the IP datagram into multiple smaller size packets. It requires to reassembly at the destination which requires resources of routers.
+
+Types:
+
+UDP and ICMP fragmentation attacks
+TCP fragmentation attacks
+TCP-State-Exhaustion Attacks
+TCP-State-Exhaustion Attacks are focused on web servers, firewalls, load balancers and other infrastructure component to disrupt connections by exhausting their finite number of concurrent connections.
+
+Most common state-exhaustion attack is ping of death.
+
+Application Layer Attacks / Layer 7 DDoS
+The application level attack overloads the particular service of a website or application.
+
+DoD/DDoS Attack Techniques
+Bandwidth Attacks
+Bandwidth attack requires multiple sources to generate q request to overload the target. The goal is to consume the bandwidth completely.
+
+Zombie servers or Botnets used to perform this type of attack.
+
+Service Request Floods
+Attacker flood the request towards a web service or server until it is overloaded.
+
+SYN Attack / Flooding
+The attacker sending a lot of SYN request to tying up a system. The victim waits for the acknowledgement from the IP address, but there will be no response because the source address is spoofed. This waiting period ties up a connection "listen to queue", that can tie up for 75 seconds.
+
+ICMP Flood Attack
+Flooding ICMP request without waiting for the response overwhelm the resource of the network device.
+
+Peer-to-Peer Attacks
+Exploit bugs in peer-to-peer servers using Direct Connect (DC++). Using one or more malicious hosts in a peer-to-peer network to perform the attack.
+
+Permanent DoS Attack (PDoS)
+Permanent DoS attack is focused on hardware sabotage, cause irreversible damage to the hardware. Affected hardware require replacement or reinstall the software.
+
+Methods:
+
+Phlashing
+Bricking a system : sending fraudulent hardware updates
+Application Level Flood Attacks
+Attacker finds the fault and flaws in an application or operating system and exploits the vulnerability to gain control over a system.
+
+Distributed Reflection Denial of Service (DRDoS)
+Attacker uses an intermediary victim which redirect the traffic to a secondary victim. Secondary victim redirects the traffic to the target. The intermediary and secondary victim is used for spoofing the attack.
+
+Botnet
+Attacker compromises victims to make bot, which compromise other system to create a botnet. These botnets are controlled by Command and Control server owned by the attacker. This server is used to send instructions to perform the attack
+
+asic
+Denial-of-Service is type of attack on which service offered by a system or a network is denied. Service may either be denied, reduce the functionality or prevent the access.
+
+Symptoms of DoS attack:
+Slow performance
+Increase in spam email
+Unavailability of a resource
+Loss of access to a website
+Disconnection of a wireless or wired internet connection
+Denial of access to any internet services
+Distributed Denial of Service (DDoS)
+In DDoS, multiple compromised systems are involved to attack a target.
+
+The attacker send several connection request to the server with fake return address, so the server can't find a user to send the connection approval. The authentication process waits for a certain time to close the session. The attacker is continuously sending requests which causing a number of open connection on the server that lead to a denial of service.
+
+Categories of DoS/DDoS Attacks
+Volumetric Attacks
+Denial of Service attack performed by sending a high amount of traffic towards the target. Volumetric attack are focused on overloading the bandwidth capability.
+
+Fragmentation Attacks
+DoS attacks witch fragment the IP datagram into multiple smaller size packets. It requires to reassembly at the destination which requires resources of routers.
+
+Types:
+
+UDP and ICMP fragmentation attacks
+TCP fragmentation attacks
+TCP-State-Exhaustion Attacks
+TCP-State-Exhaustion Attacks are focused on web servers, firewalls, load balancers and other infrastructure component to disrupt connections by exhausting their finite number of concurrent connections.
+
+Most common state-exhaustion attack is ping of death.
+
+Application Layer Attacks / Layer 7 DDoS
+The application level attack overloads the particular service of a website or application.
+
+DoD/DDoS Attack Techniques
+Bandwidth Attacks
+Bandwidth attack requires multiple sources to generate q request to overload the target. The goal is to consume the bandwidth completely.
+
+Zombie servers or Botnets used to perform this type of attack.
+
+Service Request Floods
+Attacker flood the request towards a web service or server until it is overloaded.
+
+SYN Attack / Flooding
+The attacker sending a lot of SYN request to tying up a system. The victim waits for the acknowledgement from the IP address, but there will be no response because the source address is spoofed. This waiting period ties up a connection "listen to queue", that can tie up for 75 seconds.
+
+ICMP Flood Attack
+Flooding ICMP request without waiting for the response overwhelm the resource of the network device.
+
+Peer-to-Peer Attacks
+Exploit bugs in peer-to-peer servers using Direct Connect (DC++). Using one or more malicious hosts in a peer-to-peer network to perform the attack.
+
+Permanent DoS Attack (PDoS)
+Permanent DoS attack is focused on hardware sabotage, cause irreversible damage to the hardware. Affected hardware require replacement or reinstall the software.
+
+Methods:
+
+Phlashing
+Bricking a system : sending fraudulent hardware updates
+Application Level Flood Attacks
+Attacker finds the fault and flaws in an application or operating system and exploits the vulnerability to gain control over a system.
+
+Distributed Reflection Denial of Service (DRDoS)
+Attacker uses an intermediary victim which redirect the traffic to a secondary victim. Secondary victim redirects the traffic to the target. The intermediary and secondary victim is used for spoofing the attack.
+
+Botnet
+Attacker compromises victims to make bot, which compromise other system to create a botnet. These botnets are controlled by Command and Control server owned by the attacker. This server is used to send instructions to perform the attack
+
+
+Terminology
+Web Applications are that applications that is running on a remote application server and available for clients over the internet.
+
+Server Administrators are responsible for the web server's safety, speed, functioning and performance.
+
+Application Administrators are responsible for the management and configuration required for the web application.
+
+Clients are the endpoints which interact with the web application / server.
+
+How Web Applications work?
+Front-end <-> Back-end
+
+Users are interacting with the front-end. The processing was controlled and processed by the back-end.
+
+Server-side languages:
+
+PHP
+Java
+C#
+Python
+JavaScript
+many more...
+Client-side languages:
+
+CSS
+JavaScript
+HTML
+Layers of Web Applications
+Presentation Layer is responsible for displaying the information to the user.
+Logical Layer : manipulate information to and from the forms.
+Data Layer : hold the data for the application.
+Web 2.0
+In web 1.0, the users are limited to passive viewing the content.
+
+In web 2.0, the users can interact and collaborate, it contain rich user experience, dynamic content.
+
+Web Application Threats
+Cookie poisoning
+Insecure storage
+Information leakage
+Directory traversal
+Parameter/Form tampering
+DOS attack
+Buffer overflow
+Log tampering
+SQL injection
+Cross-site Script
+Cross-site Request Forgery
+Security misconfiguration
+Broken session management
+DMZ attacks
+Session hijacking
+Network access attacks
+Unvalidated input
+Process an non-validated input from the client to the back-end. This is a major vulnerability, this is the basics of injection attacks (SQL injection, xss, buffer overflow).
+
+Parameter / Form Tampering
+Parameter tempering is an attack, where the attacker manipulate the parameter while client and server are communicating with each other. Parameters such as Uniform Resource Locator (URL) or web page form fields are modified (cookies, HTTP Header, form fields).
+
+Injection Flaws
+Works if a web application allows untrusted input to be executed.
+
+Malicious code injection
+File injection
+SQL injection
+Command injection
+LDAP injection
+SQL Injection
+Injection of malicious SQL queries. Attacker can manipulate the database These vulnerabilities can be detected by using an automated scanner.
+
+Command Injection
+Shell injection
+File injection
+HTML embedding
+LDAP Injection
+Attacker can access the database using LDAP filter to search information.
+
+DoS Attack
+User Registration DoS : an automated process, the attacker keep registering fake accounts.
+Login DoS : attacker keep sending login requests.
+User Enumeration : attacker brute force login credentials with a dictionary attacks.
+Account Lock : attacker attempt to lock the user account by attempting invalid passwords.
+Web Application Hacking Methodology
+Analyze Web Application
+Observing functionality
+Identify vulnerabilities, entry points, servers
+HTTP request analyze
+HTTP fingerprinting
+Hidden content discovery
+Attack Authentication
+Exploit the authentication mechanism:
+
+Username enumerate
+Cookie exploitation
+Session attacks
+Password attacks
+Authorization Attack Schemes
+Accessing the web application with low level privilege account, then escalate privileges to get information
+Parameter tampering (URL, POST data, Query string, cookies, HTTP header)
+Session Management Attack
+Impersonate a legitimate user.
+
+Session hijacking techniques:
+
+Session token prediction
+Session token tampering
+Man-in-the-Middle attack
+Session replay
+Injection Attacks
+Inject malicious code, commands and files.
+
+Techniques:
+
+Web Script injection
+OS Command injection
+SMTP injection
+SQL injection
+LDAP injection
+XPath injection
+Buffer Overflow
+Canonicalization
+Data Connectivity Attack
+Exploit the data connectivity between application and its database. Data connection requires a connection string.
+
+Connection String Injection
+Connection String Parameters Pollution (CSPP)
+Connection Pool DoS
+Countermeasures
+Percent Encoding
+Percent Encoding or URL Encoding is a technique for secure handling of URL by replaces unsafe and non-ascii characters with % followed by two hexadecimal digits.
+
+Example:
+
+%20 or + both are used for SPACE
+
+In URL:, there are some reserved character such as '/' that is used to separate paths in URL. To use this not as separator, then it must be encoded.
+
+%2F used for '/'
+
+Full list of percent encoded characters here
+
+HTML Encoding
+HTML Encoding specify how special character will shown.
+
+SQL Injection Contermeasures
+Input validation
+Customized error messages
+Monitoring database traffic
+Limit length of user input
+XSS Attack Countermeasures
+Testing tools
+Filtering meta
+Filtering output
+DOS Attack Countermeasures
+Reverse proxy
+Remove unnecessary functions
+Secure remote administration
+Firewall
+IDS
+Other Countermeasures
+Dynamic testing
+Source Code analysis
+Strong cryptography
+Use SSL
+Hotfixes / patches
+Cookie timeout
+
+Terminology
+The intention of SQL injection is to reveal or manipulate sensitive information from the database by injecting commands into existing queries.
+
+Bypassing authentication
+Revealing sensitive information
+Compromise data integrity
+Erase database
+Remote code execution
+Tools
+sqlmap
+SQL
+SQL stands for Structured Query Language.
+
+SQL tutorial here
+
+Types of SQL Injection
+In-Band SQL Injection
+Use the same communication channel to launch the attack and get the result.
+
+Error Based SQL Injection
+Server throw an error message
+Error message is useful during the development, but should be disabled it when the application is live
+Techniques to perform SQL Injection
+System stored procedure
+End of line comment
+Illegal / Logically incorrect query
+Tautology (something that is inherently true, like " OR 1=1")
+Union SQL Injection
+Involves the UNION SQL operator, to combine the queries.
+
+Select the password from table1 and table2 using UNION:
+
+SELECT password FROM table1
+UNION
+SELECT password FROM table2
+Inferential SQL Injection
+Known as Blind SQL Injection
+No data is transferred from the via the application, the attacker sending payloads, then observe the web application's response and behavior.
+Boolean-based Blind SQL Injection
+Sending an SQL query to the database which send a different result depending on whether the query returns TRUE or FALSE result, the HTTP response will change or remain the same.
+
+This type of attack is slow, attacker need to enumerate the database, character by character.
+
+Time-based Blind SQL Injection
+Attacker send a query, force the database to wait for a specified time before respond. The respond time indicate that the query TRUE or FALSE.
+
+Out-of-band SQL Injection
+Depends on the features allowed on the database server (DNS, HTTP request), so not a very common attack.
+
+Use different channel to launch the attack.
+
+SQL Injection Methodology
+Information Gathering And Vulnerability Detection
+Collect the information about the web application, server, OS, database, ...
+Identify vulnerabilities
+Evaluate input fields
+Launch Attack
+Select the appropriate type of SQL Injection, based on the gathered information
+Advanced SQL Injection
+Enumerate the database (Postgre, MySQL, Oracle, ...)
+Identify privilege level of users
+Passwords and hashes grabbing
+Transfer database to a remote machine
+Evasion Techniques
+Evading IDS
+Inserting inline comment in between keywords
+Character encoding
+String Concatenation
+Obfuscated codes
+Manipulating white spaces
+Hex encoding
+Sophisticated matches
+Countermeasures
+Penetration testing (manual, with tool)
+Source code analysis
+Wep Application Firewall (WAF)
+Remove debugging messages
+Database account with minimal privileges
+Input validation
+Filter data
+Customize error messages
+IDS
+
+erms
+Wireless network is a computer network that uses wireless data connection between network nodes.
+
+Access Point: Access Point (AP) or Wireless Access Point (WAP) is a hardware device that allows wireless connectivity to the end devices.
+
+Service Set Identifier (SSID): A 32 bit identification string of the Access Point, the AP's name. SSID inserted into the header of every data packet.
+
+Basic Service Set Identifier (BSSID): MAC address of the Access Point.
+
+ISM Band: A frequency band dedicated to the Industrial, Scientific and Medical purpose.
+
+GSM
+Global System for Mobile Communication
+Generations: 2G (GSM), 3G (UMTS), 4G (LTE)
+Frequency: 900 MHz - 1800 MHz
+Wireless Standards
+Protocol	Frequency	Modulation
+802.11a	5 GHz	OFDM
+802.11b	2.4 GHz	DSSS
+802.11g	2.4 Ghz	OFDM
+802.11n	2.4/5 Ghz	MIMO-OFDM
+802.11ac	5 Ghz	MIMO-OFDM
+Bluetooth	2.4 Ghz	
+Wi-FI
+Wi-Fi is a local area networking technology based on the IEEE 802.11 standard.
+
+Wi-Fi Authentication
+Open authentication
+Shared Key authentication
+Open Authentication
+Client		WAP
+Probe Request	->	
+<-	Probe Response
+Open System Authentication Request	->	
+<-	Open System Authentication Response
+Association Request	->	
+<-	Association Response
+The Probe Request is to discover the network
+The Probe Response contains the parameters (SSID, data rate, encryption, ...)
+The Open System Authentication Request (authentication frame) is to set authentication open, the sequence number is set to 0x0001
+The Open System Request Response's sequence number is 0x0002
+The Association Request contains the security parameters (choosen encryption, ...)
+The Association Response complete the associations process
+Shared Key Authentication
+Client		WAP
+Authentication Request	->	
+<-	Authentication Response with Challenge Text
+Encrypted Challenge Response	->	
+<-	Successful / Unsuccessful response
+Challenge test
+The client encrypt the challenge test with his shared key
+The AP decrypt the encrypted challenge test with his shared key, if the decrypted text matches, the successful authentication response frame is sent to the client
+This challenge test can be captured by a hacker as a clear text, so the hacker can get the shared key
+IEEE 802.1X
+IEEE 802.1X is an IEEE Standard for port-based Network Access Control (PNAC). It provides an authentication mechanism to devices wishing to attach to a LAN or WLAN.
+
+Extensible Authentication Protocol (EAP) is an authentication framework frequently used in wireless networks and point-to-point connections. For example, in IEEE 802.11 (Wi-Fi) the WPA and WPA2 standards have adopted IEEE 802.1X with one hundred EAP Types as the official authentication mechanisms.
+
+Parties
+Supplicant : a client device (such as a laptop) that wishes to attach to the LAN/WLAN
+Authenticator : a network device, such as an Ethernet switch or wireless access point
+Authentication server : typically a host running software supporting the RADIUS and EAP protocols
+Authentication Progress
+The client may send an EAP-start message.
+The access point sends an EAP-request identity message.
+The client's EAP-response packet with the client's identity is "proxied" to the authentication server by the authenticator.
+The authentication server challenges the client to prove themselves and may send its credentials to prove itself to the client (if using mutual authentication).
+The client checks the server's credentials (if using mutual authentication) and then sends its credentials to the server to prove itself.
+The authentication server accepts or rejects the client's request for connection.
+If the end user was accepted, the authenticator changes the virtual port with the end user to an authorized state allowing full network access to that end user.
+At log-off, the client virtual port is changed back to the unauthorized state.
+Wardriving
+Wardriving is the act of searching for Wi-Fi wireless networks by a person usually in a moving vehicle, using a laptop or smartphone.
+
+Variants : warwalking, warcycling, warflying (drone)
+
+Warchalking is the drawing of symbols in public places to advertise Wi-Fi networks.
+
+Types of Wireless Antennas
+Directional Antenna
+Direction antennas are designed to function in a specific direction to improve efficiency
+
+Some types of directional antenna: Parabolic antenna , Yagi-Uda antenna , Horn antenna
+
+Omnidirectional antennas
+Omnidirectional antenna radiates equal radio power in all directions. When graphed in three dimensions this radiation pattern is often described as doughnut-shaped.
+
+Use cases: radio broadcasting, cell phones, GPS
+
+Some type: Whip antenna , Rubber Ducky antenna , Monopole antenna
+
+Wireless Encryption
+Wired Equivalent Privacy (WEP)
+Designed to provide the same level of security as that of a wired LAN
+Authentications: Open System authentication, Shared Key (need to provide a key)
+WEP Key is a sequence of hexadecimal values
+WEP Key length: 10 digit (40 or 64 bit), 26 digit (104 or 128), 58 digit (256 bit)
+WEP is used in Physical layer and Data Link layer of OSI model
+Initialization Vector (IV) is 24-bit long
+WEP work
+Breaking WEP Encryption
+Monitor the Access Point channel
+Test injection capability to the AP
+Use tool for fake authentication
+Sniff the packets
+Inject encrypted packets
+Extract the encryption key form IV with a cracking tool
+Wi-Fi Protected Access (WPA)
+Used for WLAN network based on 802.11i
+Temporal Key Integrity Protocol (TKIP) implements a key mixing function that combines the secret key with the initialization vector before passing it to the RC4 cipher. WEP, in comparison, merely concatenated the initialization vector to the root key, and passed this value to the RC4 routine.
+TKIP increased the key length to 128-bit
+Implements a sequence counter to protect against replay attacks
+Implements a 64-bit Message Integrity Check, a checksum to protect against tampering
+Initialization Vector is 48-bit long
+WPA2
+Counter Mode Cipher Block Chaining Message Authentication Code Protocol (CCMP) is an enhanced data cryptographic encapsulation mechanism designed for data confidentiality
+Implements AES based encryption mode
+Wi-Fi Protected Setup (WPS) allows users to quickly connect to a WPA protected WLAN
+WPA-Personal uses password (Pre-Shared Key(PSK)) for authentication
+WPA-Enterprise includes EAP or RADIUS for centralized authentication
+Breaking WPA Encryption
+Brute forcing the PSK with a dictionary attack
+Capture the Authentication Handshake packets to crack the WPA-PSK offline
+Deauthenticate client to force to reconnect to brute force the Pairwise Master Key (PMK)
+Wireless Threats
+Access Control Attacks : evading access control parameters (MAC spoofing, Rogue Access point)
+Integrity Attacks : Data frame injection, replay attacks, etc...
+Confidentiality Attacks : traffic analysis, session hijacking, MITM, etc...
+Availability Attacks : prevent user from accessing the wireless network (flooding, ARP poisoning, De-Authentication attacks)
+Authentication Attacks : steal identity information or impersonating clients (password cracking, identity theft, password guessing)
+Rogue Access Point : a fake access point in a place with the legitimate one, with the same SSID to monitor victims activity by sniffing packets
+Client Mis-Association Attacks : a rogue access point outside the place with the legitimate one, when Wi-Fi turned on, it will probe for networks that previously connected to
+Misconfigured Access Point Attacks : get legitimate access by taking advantage of access point's misconfiguration (default or week password, without password)
+Unauthorized Association : a trojan turns the victims computer into an access point to get connection with the target network
+Ad Hoc Connection Attack : attacker compromise the client ad hoc mode
+Jamming Signal Attacks : jamming or blocking the wireless communication, causing a denial of service
+Hacking Methodology
+Wi-Fi Discovery
+Passive footprinting (sniffing packets)
+Active footprinting (probing the AP to get information)
+GPS Mapping
+Create list of discovered Wi-Fi networks including GPS location
+Wireless Traffic Analysis
+Capture the packets to reveal any information (SSID, authentication method, ...)
+Launch Attacks
+ARP poisoning
+MAC spoofing
+De-Authentication
+Rogue access point
+MITM
+Wireless Security Tools
+Wireless Intrusion Prevention System (WIPS)
+Monitors the wireless network
+Protect against unauthorized access points
+Perform automatic intrusion prevention
+Monitors the radio spectrum to prevents rogue access point and alert the network administrator
+Fingerprint approach to filter devices with spoofed MAC address
+WIPS has three component: server, sensor and console
+Can detect AP misconfiguration
+Detect honeypots
+Mitigate DoS
+Wi-Fi Security Auditing Tool
+Wireless network auditing
+Troubleshooting
+Intrusion detection / prevention
+Threat mitigation
+Rogue detection
+Zero-day threat protection
+Wi-Fi Countermeasures
+Change default parameters
+Disable remote login to wireless devices
+Wireless IPS deployment
+Use strong password
+Use the latest standards (WPA2 AES)
+MAC filtering
+Update software often
+Enable firewall
+Use network management software
+Bluetooth
+Bluetooth is a wireless technology for exchanging data over short distance
+Range: typically less then 10m
+Operates on the 2.4 GHz
+Discovery feature can control the visibility of the device
+Bluetooth Attacks
+BlueSmacking : flooding echo packages to cause a denial of service
+BlueBugging : exploiting bugs in Bluetooth devices to gain remote access
+BlueJacking : send unsolicited data to Bluetooth devices
+BluePrinting : extract information about the device
+BlueSnarfing : steal data from target device
+Countermeasures
+Check paired devices
+Turn off visibility / turn off Bluetooth if not used
+Use strong PIN
+Use encryption
+Don't accept unknown requests
+
+
+Mobile Platform Attack Vectors
+OWASP Top 10 Mobile Threats
+OWASP Mobile Security Project maintain a list of the most common mobile security risks.
+
+Top Ten (2014)
+Weak Server Side Controls
+Insecure Data Storage
+Insufficient Transport Layer Protection
+Unintended Data Leakage
+Poor Authorization and Authentication
+Broken Cryptography
+Client Side Injection
+Security Decisions via Untrusted Inputs
+Improper Session Handling
+Lack of Binary Protections
+Top Ten (2016)
+Improper Platform Usage: misuse of a platform feature or failure to use a platform security controls
+Insecure Data Storage: insecure data storage + unintended data leakage
+Insecure Communication: poor handshaking, incorrect SSL, weak negotiation, cleartext communication of sensitive assets, ...
+Insecure Authentication: captures notions of authenticating the end user or bad session management
+Insufficient Cryptography: cryptography was attempted, but it wasn't done correctly
+Insecure Authorization: capture any failures in authorization
+Client Code Quality: all of the code-level implementation problem in the mobile client
+Code Tampering: binary patching, local resource modification, method hooking, dynamic memory modification, ...
+Reverse Engineering: analysis of the final core binary to determine the source code, libraries, ...
+Extraneous Functionality: internal development security controls that are not intended to be released into a production environment
+Attack Vector
+Basic Threats
+Malware / rootkit
+Data Loss
+Data Tampering
+Data Exfiltration
+Vulnerabilities And Risks on Mobile Platforms
+Malicious third-party application / in the store
+Application vulnerability
+Data security
+Excessive permissions
+Weak encryptions
+Operating System update issue
+Application update issue
+Jailbreaking / rooting
+Physical attack
+OS Sandboxing Issue
+Sandbox is a security mechanism for separating running programs, usually in an effort to mitigate system failures or software vulnerabilities from spreading
+Sandbox limits the app's access to files, preferences, network resources, ...
+Advanced malware designed to bypass it, by fragment code or put sleep timer in the script to bypass the inspection process
+Android
+Device Administration API
+Provides device administration features at the system level
+This API allows to create security-aware apps that are useful in the enterprise settings, where require rich control over employee devices
+Rooting
+A process of allowing user to attain privileged control
+Needed for modify settings, get full control over the kernel or install custom ROMs
+iOS
+Jailbreaking
+Rooting the iOS
+Escalating the privileges on iOS to remove or bypass the factory default restrictions
+Types of Jailbreaking
+Userland Exploit : allow user-level access without escalating iBoot-level access
+iBoot Exploit : allow user-level and boot-level access
+Bootrom Exploit : allow user-level and boot-level access
+Jailbreaking Techniques
+Untethered Jailbreak
+Does not require to reboot with a connection to your computer
+Exploit bypass the iBoot sequence
+Tethered Jailbreak
+Need a connection to your computer to reboot, without it, the boot stuck with an Apple logo
+Offers complete jailbreak features
+Semi-Untethered Jailbreak
+Allows to boot into the iOS device, but with limited functionality
+The jailbreak functions will be disabled until the launch of a jailbreak app
+Semi-Tethered Jailbreak
+Allows you to boot with limited functionality
+To get the full functionality, a reboot with a tethered jailbreak required
+Semi-Tethered Jailbreak: tethered jailbreak + a package to allow reboot with limited functionality
+Windows Phone
+Windows Phone 8 using the Windows NT Kernel
+Windows Phone 8 include app sandboxing, remote device management, native code support (C++)
+BlackBerry OS
+Support for Java Micro Edition MIDP 1.0 and MIDP 2.0
+OS update with BlackBerry over the air software loading service (OTASL)
+Attack Vectors
+Malicious Code Signing
+Obtaining a code-signing ket from the code signing service to create a malicious application
+JAD File Exploit
+Java Application Description (.jad) contains attributes of Java application
+Attacker can craft a .jad file with spoofed information
+Mobile Device Management (MDM)
+Deployment, maintenance and monitoring of mobile devices
+MDM Functions
+Enforce device to be locked after certain failed login
+Enforce strong password policy for all BYOD
+MDM can detect attempt of hacking BYOD device and then limit the network access of the affected device
+Enforce confidentiality by using encryption as per organization's policy
+Administration and implementation of Data Loss Prevention (DLP)
+MDM Deployment Methods
+Two type:
+
+On-Site MDM Deployment
+Install MDM application on local servers
+Management is done by local staff
+Provide full control over the MDM
+Cloud-Based MDM Deployment
+MDM application is installed and maintained by a third party
+Less administration needed
+The deployment and maintenance is the responsibility of the service provider
+Bring Your Own Device (BYOD)
+BYOD is a trend of employees using their personal devices for work. It could be a laptop, a phone, etc...
+
+BYOD Policies
+BYOD policies should include:
+
+Device: which devices and operating systems are supported
+Password: require all devices to be password protected
+Access: determine which data can be accessed from employee's device
+Application: which applications allowed, which should be banned
+Mobile Security Guideline
+Avoid auto-upload of files
+Perform security assessment of applications
+Turn off Bluetooth
+Allow only necessary GPS-enabled applications
+Do not connect to open network
+Install applications from trusted sources
+Use strong password
+Use Mobile Device Management (MDM) softwares
+Update operating system often
+Do not allow rooting / jailbreaking
+Encrypt phone storage
+Periodic backup
+Configure mobile device policies
+
+Basic
+The Internet of things (IoT) is the network of devices, vehicles, and home appliances that contain electronics, software, actuators, and connectivity which allows these things to connect, interact and exchange data.
+
+IoT involves extending Internet connectivity beyond standard devices, such as desktops, laptops, smartphones and tablets, to any range of traditionally dumb or non-internet-enabled physical devices and everyday objects.
+
+Embedded with technology, these devices can communicate and interact over the Internet, and they can be remotely monitored and controlled.
+
+Main Components
+Sensors
+Device
+Gateway
+Cloud
+IoT Architecture
+Perception Layer : sensors that gather information about the environment (heat sensor)
+Transport Layer : transfer the sensor data through network (Wi-Fi, Bluetooth, ...)
+Processing Layer : stores, processes, analyses data (cloud computing, big data, ...)
+Application Layer : delivering application specific services to the user
+Business Layer : manage the whole IoT system (business and profit model, user's privacy)
+IoT Technologies
+IoT uses IPv6 due to the limited number of IPv4 addresses
+Wireless
+Short-Range Wireless Communication
+Bluetooth Low Energy (BLE)
+Wi-FI
+Radio-Frequency Identification (RFID)
+Light-Fidelity (Li-Fi): similar to Wi-Fi, but using visible light for communication
+Near-Field Communication (NFC)
+Medium-Range Wireless Communication
+LTE-Advanced : formally submitted as a candidate 4G, often being described as 3.9G (beyond 3G but pre-4G)
+Wi-Fi HaLow : uses 900MHz to provide extended range, lower energy consumption
+Long Range Wireless Communication
+Low-Power Wild-Area Network (LPWAN) : designed to allow long range communication at a low bit rate among things
+Very Small Aperture Terminal (VSAT) : satellite communication technology uses small dish antennas
+Cellular
+Wired Communication
+Ethernet
+Power-Line Communication (PLC) : using electrical wiring to carry power and data
+Operating System
+Linux on embedded systems
+Windows IoT
+IoT Communication Models
+Device-To-Device Model
+The devices communicating with each other without interfering any other device
+Using communication medium such as a wireless network
+Device-To-Cloud Model
+The IoT device directly communicating with the application server
+The application server provide information exchange between these devices
+Device-To-Gateway Model
+Gateway collects the data from the sensors, then send it to the application server
+Gateway provides security or information and protocol translation
+Back-End Data-Sharing Model
+Used a collective partnership between different application providers
+Access granted to the uploaded data to third-parties
+An extended Device-To-Cloud model
+Challenges to IoT
+Lack of security
+Vulnerable interfaces
+Physical security risk
+Lack of vendor support
+Difficult ot update firmware and OS
+Interoperability issues
+OWASP Top Ten IoT (2014)
+Insecure web interface
+Insufficient authentication / authorization
+Insecure network services
+Lack of transport encryption / integrity verification
+Privacy concerns
+Insecure cloud interface
+Insecure mobile interface
+Insufficient security configurability
+Insecure software / hardware
+Poor physical security
+Common Attacks
+Device memory containing credentials
+Access control
+Firmware extraction
+Privilege escalation
+Resetting to an insecure state
+Removal of storage media
+Web attacks
+Firmware attack
+Network service attacks
+Unencrypted local data storage
+Confidentiality and integrity issues
+Cloud computing attacks
+Malicious updates
+Insecure APIs
+Mobile application threats
+DoS / DDoS
+Rolling Code Attack: attacker capture signal from transmitter device, simultaneously blocking the receiver to receive the signal, later it will used to gain unauthorized access (steal car with captured signal)
+BlueBorn Attack: using different exploits to gain unauthorized access to the target device
+Jamming Attack: jamming the signal to prevent the communication of devices
+Backdoor (not just IoT related)
+Eavesdropping
+Sybil attack
+Exploit kits
+Man-in-the-middle attack
+Replay attack
+Forged malicious devices
+Side channel attack
+Ransomware attack
+Hacking Methodology
+Information Gathering
+IP address
+Running protocols
+Open ports
+Type of device
+Vendor
+shodan is a helpful search engine for IoT
+Vulnerability Scanning
+Scanning the network and devices to find vulnerabilities
+Search for weak password
+Software and firmware vulnerabilities
+Tools: nmap, hping, ...
+Attack
+Exploiting vulnerabilities
+Tools: HackRF
+Gain Access
+Gain unauthorized access
+Privilege escalation
+Install backdoor
+Maintain Attack
+Logging out
+Clearing logs
+Covering tracks
+Countermeasures
+Firmware update
+Block unnecessary ports
+Disable telnet
+Use encrypted communication (SSL/TLS)
+Use strong password
+Encrypt drives
+Periodic assessment of devices
+Secure password recovery
+Two-Factor Authentication
+Disable UPnP
+
+
+
+
+Basic
+Cloud computing is shared pools of configurable computer system resources and higher-level services that can be rapidly provisioned with minimal management effort, often over the Internet. Third-party clouds enable organizations to focus on their core businesses instead of expending resources on computer infrastructure and maintenance. Advocates note that cloud computing allows companies to avoid or minimize up-front IT infrastructure costs. Proponents also claim that cloud computing allows enterprises to get their applications up and running faster, with improved manageability and less maintenance.
+
+Characteristics of Cloud Computing
+Increase users flexibility
+Cost reduction
+Device and location independence
+Distributed storage
+Automated management
+Virtualization
+Measured services
+Cloud Computing Service Models
+Infrastructure as a Service (IaaS)
+The capability provided to the consumer is to provision processing, storage, networks, and other fundamental computing resources where the consumer is able to deploy and run arbitrary software, which can include operating systems and applications. The consumer does not manage or control the underlying cloud infrastructure but has control over operating systems, storage, and deployed applications and possibly limited control of select networking components (e.g., host firewalls).
+
+Platform as a Service (Paas)
+The capability provided to the consumer is to deploy onto the cloud infrastructure consumer-created or acquired applications created using programming languages, libraries, services, and tools supported by the provider. The consumer does not manage or control the underlying cloud infrastructure including network, servers, operating systems, or storage, but has control over the deployed applications and possibly configuration settings for the application-hosting environment.
+
+Software as a Service (SaaS)
+The capability provided to the consumer is to use the provider’s applications running on a cloud infrastructure. The applications are accessible from various client devices through either a thin client interface, such as a web browser (e.g., web-based email), or a program interface. The consumer does not manage or control the underlying cloud infrastructure including network, servers, operating systems, storage, or even individual application capabilities, with the possible exception of limited user-specific application configuration settings.
+
+Cloud Computing Deployment Module
+Private Cloud
+The cloud infrastructure is provisioned for exclusive use by a single organization comprising multiple consumers (e.g., business units). It may be owned, managed, and operated by the organization, a third party, or some combination of them, and it may exist on or off premises.
+
+Community Cloud
+The cloud infrastructure is provisioned for exclusive use by a specific community of consumers from organizations that have shared concerns (e.g., mission, security requirements, policy, and compliance considerations). It may be owned, managed, and operated by one or more of the organizations in the community, a third party, or some combination of them, and it may exist on or off premises.
+
+Public Cloud
+The cloud infrastructure is provisioned for open use by the general public. It may be owned, managed, and operated by a business, academic, or government organization, or some combination of them. It exists on the premises of the cloud provider.
+
+Hybrid Cloud
+The cloud infrastructure is a composition of two or more distinct cloud infrastructures (private, community, or public) that remain unique entities, but are bound together by standardized or proprietary technology that enables data and application portability (e.g., cloud bursting for load balancing between clouds).
+
+NIST Cloud Computing Reference Architecture
+National Institute od Standards and Technology (NIST) presented a high-level conceptual reference architecture
+Identifies the major components and their functions in cloud computing
+Intended to facilitate the understanding of the requirements, uses, characteristics and standards of cloud computing
+Actors
+Cloud Consumer : A person or organization that maintains a business relationship with, and uses services from cloud providers.
+Cloud Provider : A company or individual that delivers cloud computing based services and solutions to businesses and/or individuals.
+Cloud Auditor : A party that can conduct an independent assessment of cloud services.
+Cloud Broker : An entity that manages the use, performance and delivery of cloud services, negotiates relationships between providers and consumers.
+Cloud Carrier : An intermediary that provides connectivity and transport of cloud services from providers to consumers.
+Cloud Computing Threads
+Data loss / breach
+Abusing cloud services
+Insecure interfaces / APIs
+Inadequate infrastructure design
+Virtualization level attacks
+Service termination and failure
+Malicious insider
+Hardware failure
+Weak authentication
+Privilege escalation
+Loss of logs
+Cloud Computing Attacks
+Social engineering attacks (password guessing, ...)
+XSS attacks
+DNS attacks (DNS poisoning, domain hijacking, ...)
+SQL injection
+Network sniffing (obtain credentials, cookies, ...)
+Session hijacking (cookie stealing, ...)
+Cryptanalysis (weak encryption, ...)
+DoS / DDoS
+Side Channel Attacks or Cross-Guest Virtual Machine Breaches
+Deploy a malicious virtual machine on the same host
+Take advantage of sharing resources (processor cache, keys, ...)
+Installation can be done by a malicious insider or an impersonated legitimate user
+Cloud Security
+Application Layer
+Application firewall (filter and observe traffic)
+Systems Development Life Cycle (SDLC)
+Binary Code Analysis
+Script analysis
+Transactional security
+Network Layer
+Next Generation IPS / IDS (NGIPS / NGIDS)
+Firewalls
+DNSSec
+Anti-DDoS
+Information
+Provide confidentiality and integrity
+Data Loss Prevention (DLP)
+Content Management Framework (CMF)
+Trusted Computing
+Root of Trust (RoT) is established by validating each component of hardware and software to ensure that only trusted hardware and software can be used
+Computer and Storage
+Host-based IPS / IDS (HIDS/HIPS)
+Integrity check
+File system monitoring
+Log file analysis
+Connection analysis
+Storage encryption
+Physical Security
+Physical protection is priority
+Protect against theft, unauthorized physical access, environmental impact (rain, earthquake, power failure, ...)
+Responsibilities in Cloud Security
+Cloud Service Provider
+Web Application Firewall (WAF)
+Real Traffic Grabber (RTG)
+Firewall
+Data Loss Prevention (DLP)
+Intrusion Prevention System (IPS)
+Secure Web Gateway (SWG)
+Application Security (App Sec)
+Virtual Private Network (VPN)
+Load Balancer
+CoS / QoS
+Trusted Platform Module
+Netflow
+Cloud Service Consumer
+Public Key Infrastructure (PKI)
+Security Development Life Cycle (SDLC)
+Firewall
+Encryption
+Intrusion Prevention System (IPS)
+Application Security
+Virtual Private Network (VPN)
+Countermeasures and Security Considerations
+Software Configuration Management (SCM)
+Disaster Recovery Plan
+Load Balancing
+Data Integrity
+Patching and updates
+SSL
+Cryptography implementation
+Reliability
+Quality of Service (QoS)
+Monitoring
+Service Level Agreement (SLA)
+
+
+
+
+Terms
+Clear text / plaintext: the unencrypted data
+Cipher text: the encrypted data
+Key: specifies the transformation of data for encryption / decryption ("key" is not synonymous with "password", although a password can in fact be used as a key)
+Cipher: an algorithm for performing encryption and decryption
+Symmetric cryptography
+Use the same key for the encryption and the decryption
+Symmetric-key either use stream cipher and block cipher
+Popular algorithms: AES, DES
+Asymmetric / Public Key cryptography
+Two key used: public and private
+Public key is publicly known to everyone, issued by Public Key Infrastructure (PKI) and use to encrypt the data
+Private key is a secret for the public,only known by the owner and it is used to decrypt the data
+Asymmetric cryptography delivers confidentiality, integrity, authenticity and non-repudiation
+Popular algorithms : RSA, DSA and Diffie-Hellman
+Methods
+Substitution Cipher
+Every character is substituted with another one
+More on Wikipedia
+Example cipher : Caesar cipher
+Example:
+
+Plaintext :  THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG
+Ciphertext : QEB NRFZH YOLTK CLU GRJMP LSBO QEB IXWV ALD
+
+Key : right shift of 3 
+Transposition Cipher
+The positions held by units of plaintext are shifted according to a regular system
+Example cipher Rail Fence cipher
+Example:
+
+Clear text: WE ARE DISCOVERED. FLEE AT ONCE
+
+W . . . E . . . C . . . R . . . L . . . T . . . E
+. E . R . D . S . O . E . E . F . E . A . O . C .
+. . A . . . I . . . V . . . D . . . E . . . N . .
+
+Ciphertext: WECRLTEERDSOEEFEAOCAIVDEN
+Polyalphabetic Cipher
+Based on substitution
+Using multiple substitution alphabets
+Example cipher : Vigenère cipher
+Stream Cipher
+Text digits are combined with a pseudorandom cipher digit stream (keystream)
+Each plaintext digit is encrypted one at a time with the corresponding digit of the stream
+2 type:
+Synchronous Stream Ciphers : stream of pseudo-random digits is generated independently of the plaintext and ciphertext messages, and then combined with the plaintext (to encrypt) or the ciphertext (to decrypt)
+Self-Synchronizing Stream Cipher : uses several of the previous N ciphertext to compute the keystream
+Example cipher: RC4
+Block Cipher
+Operating on fixed-length groups of bits, called a block, with an unvarying transformation that is specified by a symmetric key
+Example cipher: AES, DES
+Stream Cipher
+RC4
+Designed in 1987, leaked in 1994
+Used in SSL, WEP
+Simple amd fast algorithm
+RC4 generates a pseudorandom stream of bits (a keystream) and combining it with the plaintext using bit-wise exclusive-or for encryption
+The permutation is initialized with a variable length key, typically between 40 and 2048 bits
+Marked as insecure
+Symmetric Algorithms
+Data Encryption Standard (DES)
+Introduced in 1975
+Standardized in 1977
+Problem with DES: short key length (56 bits)
+Now considered as insecure
+Improved version: Triple DES (involves DES three times)
+Problem with Triple DES: slow, compute heavy
+Parameters
+Parameter	Value
+Block size	64 bits
+Key size	56 bits
+No. of rounds	16
+Advanced Encryption Standard (AES)
+First published in 1998
+Became a federal government standard in 2002
+First approved (and only) publicly accessible cipher approved by the NSA for top secret information
+Parameters
+Parameter	AES-128 value	AES-192 value	AES-256 value
+Block size	128 bits	128 bits	128 bits
+Key size	128 bits	192 bits	256 bits
+No. of rounds	10	12	14
+
+GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+                            Preamble
+
+  The GNU General Public License is a free, copyleft license for
+software and other kinds of works.
+
+  The licenses for most software and other practical works are designed
+to take away your freedom to share and change the works.  By contrast,
+the GNU General Public License is intended to guarantee your freedom to
+share and change all versions of a program--to make sure it remains free
+software for all its users.  We, the Free Software Foundation, use the
+GNU General Public License for most of our software; it applies also to
+any other work released this way by its authors.  You can apply it to
+your programs, too.
+
+  When we speak of free software, we are referring to freedom, not
+price.  Our General Public Licenses are designed to make sure that you
+have the freedom to distribute copies of free software (and charge for
+them if you wish), that you receive source code or can get it if you
+want it, that you can change the software or use pieces of it in new
+free programs, and that you know you can do these things.
+
+  To protect your rights, we need to prevent others from denying you
+these rights or asking you to surrender the rights.  Therefore, you have
+certain responsibilities if you distribute copies of the software, or if
+you modify it: responsibilities to respect the freedom of others.
+
+  For example, if you distribute copies of such a program, whether
+gratis or for a fee, you must pass on to the recipients the same
+freedoms that you received.  You must make sure that they, too, receive
+or can get the source code.  And you must show them these terms so they
+know their rights.
+
+  Developers that use the GNU GPL protect your rights with two steps:
+(1) assert copyright on the software, and (2) offer you this License
+giving you legal permission to copy, distribute and/or modify it.
+
+  For the developers' and authors' protection, the GPL clearly explains
+that there is no warranty for this free software.  For both users' and
+authors' sake, the GPL requires that modified versions be marked as
+changed, so that their problems will not be attributed erroneously to
+authors of previous versions.
+
+  Some devices are designed to deny users access to install or run
+modified versions of the software inside them, although the manufacturer
+can do so.  This is fundamentally incompatible with the aim of
+protecting users' freedom to change the software.  The systematic
+pattern of such abuse occurs in the area of products for individuals to
+use, which is precisely where it is most unacceptable.  Therefore, we
+have designed this version of the GPL to prohibit the practice for those
+products.  If such problems arise substantially in other domains, we
+stand ready to extend this provision to those domains in future versions
+of the GPL, as needed to protect the freedom of users.
+
+  Finally, every program is threatened constantly by software patents.
+States should not allow patents to restrict development and use of
+software on general-purpose computers, but in those that do, we wish to
+avoid the special danger that patents applied to a free program could
+make it effectively proprietary.  To prevent this, the GPL assures that
+patents cannot be used to render the program non-free.
+
+  The precise terms and conditions for copying, distribution and
+modification follow.
+
+                       TERMS AND CONDITIONS
+
+  0. Definitions.
+
+  "This License" refers to version 3 of the GNU General Public License.
+
+  "Copyright" also means copyright-like laws that apply to other kinds of
+works, such as semiconductor masks.
+
+  "The Program" refers to any copyrightable work licensed under this
+License.  Each licensee is addressed as "you".  "Licensees" and
+"recipients" may be individuals or organizations.
+
+  To "modify" a work means to copy from or adapt all or part of the work
+in a fashion requiring copyright permission, other than the making of an
+exact copy.  The resulting work is called a "modified version" of the
+earlier work or a work "based on" the earlier work.
+
+  A "covered work" means either the unmodified Program or a work based
+on the Program.
+
+  To "propagate" a work means to do anything with it that, without
+permission, would make you directly or secondarily liable for
+infringement under applicable copyright law, except executing it on a
+computer or modifying a private copy.  Propagation includes copying,
+distribution (with or without modification), making available to the
+public, and in some countries other activities as well.
+
+  To "convey" a work means any kind of propagation that enables other
+parties to make or receive copies.  Mere interaction with a user through
+a computer network, with no transfer of a copy, is not conveying.
+
+  An interactive user interface displays "Appropriate Legal Notices"
+to the extent that it includes a convenient and prominently visible
+feature that (1) displays an appropriate copyright notice, and (2)
+tells the user that there is no warranty for the work (except to the
+extent that warranties are provided), that licensees may convey the
+work under this License, and how to view a copy of this License.  If
+the interface presents a list of user commands or options, such as a
+menu, a prominent item in the list meets this criterion.
+
+  1. Source Code.
+
+  The "source code" for a work means the preferred form of the work
+for making modifications to it.  "Object code" means any non-source
+form of a work.
+
+  A "Standard Interface" means an interface that either is an official
+standard defined by a recognized standards body, or, in the case of
+interfaces specified for a particular programming language, one that
+is widely used among developers working in that language.
+
+  The "System Libraries" of an executable work include anything, other
+than the work as a whole, that (a) is included in the normal form of
+packaging a Major Component, but which is not part of that Major
+Component, and (b) serves only to enable use of the work with that
+Major Component, or to implement a Standard Interface for which an
+implementation is available to the public in source code form.  A
+"Major Component", in this context, means a major essential component
+(kernel, window system, and so on) of the specific operating system
+(if any) on which the executable work runs, or a compiler used to
+produce the work, or an object code interpreter used to run it.
+
+  The "Corresponding Source" for a work in object code form means all
+the source code needed to generate, install, and (for an executable
+work) run the object code and to modify the work, including scripts to
+control those activities.  However, it does not include the work's
+System Libraries, or general-purpose tools or generally available free
+programs which are used unmodified in performing those activities but
+which are not part of the work.  For example, Corresponding Source
+includes interface definition files associated with source files for
+the work, and the source code for shared libraries and dynamically
+linked subprograms that the work is specifically designed to require,
+such as by intimate data communication or control flow between those
+subprograms and other parts of the work.
+
+  The Corresponding Source need not include anything that users
+can regenerate automatically from other parts of the Corresponding
+Source.
+
+  The Corresponding Source for a work in source code form is that
+same work.
+
+  2. Basic Permissions.
+
+  All rights granted under this License are granted for the term of
+copyright on the Program, and are irrevocable provided the stated
+conditions are met.  This License explicitly affirms your unlimited
+permission to run the unmodified Program.  The output from running a
+covered work is covered by this License only if the output, given its
+content, constitutes a covered work.  This License acknowledges your
+rights of fair use or other equivalent, as provided by copyright law.
+
+  You may make, run and propagate covered works that you do not
+convey, without conditions so long as your license otherwise remains
+in force.  You may convey covered works to others for the sole purpose
+of having them make modifications exclusively for you, or provide you
+with facilities for running those works, provided that you comply with
+the terms of this License in conveying all material for which you do
+not control copyright.  Those thus making or running the covered works
+for you must do so exclusively on your behalf, under your direction
+and control, on terms that prohibit them from making any copies of
+your copyrighted material outside their relationship with you.
+
+  Conveying under any other circumstances is permitted solely under
+the conditions stated below.  Sublicensing is not allowed; section 10
+makes it unnecessary.
+
+  3. Protecting Users' Legal Rights From Anti-Circumvention Law.
+
+  No covered work shall be deemed part of an effective technological
+measure under any applicable law fulfilling obligations under article
+11 of the WIPO copyright treaty adopted on 20 December 1996, or
+similar laws prohibiting or restricting circumvention of such
+measures.
+
+  When you convey a covered work, you waive any legal power to forbid
+circumvention of technological measures to the extent such circumvention
+is effected by exercising rights under this License with respect to
+the covered work, and you disclaim any intention to limit operation or
+modification of the work as a means of enforcing, against the work's
+users, your or third parties' legal rights to forbid circumvention of
+technological measures.
+
+  4. Conveying Verbatim Copies.
+
+  You may convey verbatim copies of the Program's source code as you
+receive it, in any medium, provided that you conspicuously and
+appropriately publish on each copy an appropriate copyright notice;
+keep intact all notices stating that this License and any
+non-permissive terms added in accord with section 7 apply to the code;
+keep intact all notices of the absence of any warranty; and give all
+recipients a copy of this License along with the Program.
+
+  You may charge any price or no price for each copy that you convey,
+and you may offer support or warranty protection for a fee.
+
+  5. Conveying Modified Source Versions.
+
+  You may convey a work based on the Program, or the modifications to
+produce it from the Program, in the form of source code under the
+terms of section 4, provided that you also meet all of these conditions:
+
+    a) The work must carry prominent notices stating that you modified
+    it, and giving a relevant date.
+
+    b) The work must carry prominent notices stating that it is
+    released under this License and any conditions added under section
+    7.  This requirement modifies the requirement in section 4 to
+    "keep intact all notices".
+
+    c) You must license the entire work, as a whole, under this
+    License to anyone who comes into possession of a copy.  This
+    License will therefore apply, along with any applicable section 7
+    additional terms, to the whole of the work, and all its parts,
+    regardless of how they are packaged.  This License gives no
+    permission to license the work in any other way, but it does not
+    invalidate such permission if you have separately received it.
+
+    d) If the work has interactive user interfaces, each must display
+    Appropriate Legal Notices; however, if the Program has interactive
+    interfaces that do not display Appropriate Legal Notices, your
+    work need not make them do so.
+
+  A compilation of a covered work with other separate and independent
+works, which are not by their nature extensions of the covered work,
+and which are not combined with it such as to form a larger program,
+in or on a volume of a storage or distribution medium, is called an
+"aggregate" if the compilation and its resulting copyright are not
+used to limit the access or legal rights of the compilation's users
+beyond what the individual works permit.  Inclusion of a covered work
+in an aggregate does not cause this License to apply to the other
+parts of the aggregate.
+
+  6. Conveying Non-Source Forms.
+
+  You may convey a covered work in object code form under the terms
+of sections 4 and 5, provided that you also convey the
+machine-readable Corresponding Source under the terms of this License,
+in one of these ways:
+
+    a) Convey the object code in, or embodied in, a physical product
+    (including a physical distribution medium), accompanied by the
+    Corresponding Source fixed on a durable physical medium
+    customarily used for software interchange.
+
+    b) Convey the object code in, or embodied in, a physical product
+    (including a physical distribution medium), accompanied by a
+    written offer, valid for at least three years and valid for as
+    long as you offer spare parts or customer support for that product
+    model, to give anyone who possesses the object code either (1) a
+    copy of the Corresponding Source for all the software in the
+    product that is covered by this License, on a durable physical
+    medium customarily used for software interchange, for a price no
+    more than your reasonable cost of physically performing this
+    conveying of source, or (2) access to copy the
+    Corresponding Source from a network server at no charge.
+
+    c) Convey individual copies of the object code with a copy of the
+    written offer to provide the Corresponding Source.  This
+    alternative is allowed only occasionally and noncommercially, and
+    only if you received the object code with such an offer, in accord
+    with subsection 6b.
+
+    d) Convey the object code by offering access from a designated
+    place (gratis or for a charge), and offer equivalent access to the
+    Corresponding Source in the same way through the same place at no
+    further charge.  You need not require recipients to copy the
+    Corresponding Source along with the object code.  If the place to
+    copy the object code is a network server, the Corresponding Source
+    may be on a different server (operated by you or a third party)
+    that supports equivalent copying facilities, provided you maintain
+    clear directions next to the object code saying where to find the
+    Corresponding Source.  Regardless of what server hosts the
+    Corresponding Source, you remain obligated to ensure that it is
+    available for as long as needed to satisfy these requirements.
+
+    e) Convey the object code using peer-to-peer transmission, provided
+    you inform other peers where the object code and Corresponding
+    Source of the work are being offered to the general public at no
+    charge under subsection 6d.
+
+  A separable portion of the object code, whose source code is excluded
+from the Corresponding Source as a System Library, need not be
+included in conveying the object code work.
+
+  A "User Product" is either (1) a "consumer product", which means any
+tangible personal property which is normally used for personal, family,
+or household purposes, or (2) anything designed or sold for incorporation
+into a dwelling.  In determining whether a product is a consumer product,
+doubtful cases shall be resolved in favor of coverage.  For a particular
+product received by a particular user, "normally used" refers to a
+typical or common use of that class of product, regardless of the status
+of the particular user or of the way in which the particular user
+actually uses, or expects or is expected to use, the product.  A product
+is a consumer product regardless of whether the product has substantial
+commercial, industrial or non-consumer uses, unless such uses represent
+the only significant mode of use of the product.
+
+  "Installation Information" for a User Product means any methods,
+procedures, authorization keys, or other information required to install
+and execute modified versions of a covered work in that User Product from
+a modified version of its Corresponding Source.  The information must
+suffice to ensure that the continued functioning of the modified object
+code is in no case prevented or interfered with solely because
+modification has been made.
+
+  If you convey an object code work under this section in, or with, or
+specifically for use in, a User Product, and the conveying occurs as
+part of a transaction in which the right of possession and use of the
+User Product is transferred to the recipient in perpetuity or for a
+fixed term (regardless of how the transaction is characterized), the
+Corresponding Source conveyed under this section must be accompanied
+by the Installation Information.  But this requirement does not apply
+if neither you nor any third party retains the ability to install
+modified object code on the User Product (for example, the work has
+been installed in ROM).
+
+  The requirement to provide Installation Information does not include a
+requirement to continue to provide support service, warranty, or updates
+for a work that has been modified or installed by the recipient, or for
+the User Product in which it has been modified or installed.  Access to a
+network may be denied when the modification itself materially and
+adversely affects the operation of the network or violates the rules and
+protocols for communication across the network.
+
+  Corresponding Source conveyed, and Installation Information provided,
+in accord with this section must be in a format that is publicly
+documented (and with an implementation available to the public in
+source code form), and must require no special password or key for
+unpacking, reading or copying.
+
+  7. Additional Terms.
+
+  "Additional permissions" are terms that supplement the terms of this
+License by making exceptions from one or more of its conditions.
+Additional permissions that are applicable to the entire Program shall
+be treated as though they were included in this License, to the extent
+that they are valid under applicable law.  If additional permissions
+apply only to part of the Program, that part may be used separately
+under those permissions, but the entire Program remains governed by
+this License without regard to the additional permissions.
+
+  When you convey a copy of a covered work, you may at your option
+remove any additional permissions from that copy, or from any part of
+it.  (Additional permissions may be written to require their own
+removal in certain cases when you modify the work.)  You may place
+additional permissions on material, added by you to a covered work,
+for which you have or can give appropriate copyright permission.
+
+  Notwithstanding any other provision of this License, for material you
+add to a covered work, you may (if authorized by the copyright holders of
+that material) supplement the terms of this License with terms:
+
+    a) Disclaiming warranty or limiting liability differently from the
+    terms of sections 15 and 16 of this License; or
+
+    b) Requiring preservation of specified reasonable legal notices or
+    author attributions in that material or in the Appropriate Legal
+    Notices displayed by works containing it; or
+
+    c) Prohibiting misrepresentation of the origin of that material, or
+    requiring that modified versions of such material be marked in
+    reasonable ways as different from the original version; or
+
+    d) Limiting the use for publicity purposes of names of licensors or
+    authors of the material; or
+
+    e) Declining to grant rights under trademark law for use of some
+    trade names, trademarks, or service marks; or
+
+    f) Requiring indemnification of licensors and authors of that
+    material by anyone who conveys the material (or modified versions of
+    it) with contractual assumptions of liability to the recipient, for
+    any liability that these contractual assumptions directly impose on
+    those licensors and authors.
+
+  All other non-permissive additional terms are considered "further
+restrictions" within the meaning of section 10.  If the Program as you
+received it, or any part of it, contains a notice stating that it is
+governed by this License along with a term that is a further
+restriction, you may remove that term.  If a license document contains
+a further restriction but permits relicensing or conveying under this
+License, you may add to a covered work material governed by the terms
+of that license document, provided that the further restriction does
+not survive such relicensing or conveying.
+
+  If you add terms to a covered work in accord with this section, you
+must place, in the relevant source files, a statement of the
+additional terms that apply to those files, or a notice indicating
+where to find the applicable terms.
+
+  Additional terms, permissive or non-permissive, may be stated in the
+form of a separately written license, or stated as exceptions;
+the above requirements apply either way.
+
+  8. Termination.
+
+  You may not propagate or modify a covered work except as expressly
+provided under this License.  Any attempt otherwise to propagate or
+modify it is void, and will automatically terminate your rights under
+this License (including any patent licenses granted under the third
+paragraph of section 11).
+
+  However, if you cease all violation of this License, then your
+license from a particular copyright holder is reinstated (a)
+provisionally, unless and until the copyright holder explicitly and
+finally terminates your license, and (b) permanently, if the copyright
+holder fails to notify you of the violation by some reasonable means
+prior to 60 days after the cessation.
+
+  Moreover, your license from a particular copyright holder is
+reinstated permanently if the copyright holder notifies you of the
+violation by some reasonable means, this is the first time you have
+received notice of violation of this License (for any work) from that
+copyright holder, and you cure the violation prior to 30 days after
+your receipt of the notice.
+
+  Termination of your rights under this section does not terminate the
+licenses of parties who have received copies or rights from you under
+this License.  If your rights have been terminated and not permanently
+reinstated, you do not qualify to receive new licenses for the same
+material under section 10.
+
+  9. Acceptance Not Required for Having Copies.
+
+  You are not required to accept this License in order to receive or
+run a copy of the Program.  Ancillary propagation of a covered work
+occurring solely as a consequence of using peer-to-peer transmission
+to receive a copy likewise does not require acceptance.  However,
+nothing other than this License grants you permission to propagate or
+modify any covered work.  These actions infringe copyright if you do
+not accept this License.  Therefore, by modifying or propagating a
+covered work, you indicate your acceptance of this License to do so.
+
+  10. Automatic Licensing of Downstream Recipients.
+
+  Each time you convey a covered work, the recipient automatically
+receives a license from the original licensors, to run, modify and
+propagate that work, subject to this License.  You are not responsible
+for enforcing compliance by third parties with this License.
+
+  An "entity transaction" is a transaction transferring control of an
+organization, or substantially all assets of one, or subdividing an
+organization, or merging organizations.  If propagation of a covered
+work results from an entity transaction, each party to that
+transaction who receives a copy of the work also receives whatever
+licenses to the work the party's predecessor in interest had or could
+give under the previous paragraph, plus a right to possession of the
+Corresponding Source of the work from the predecessor in interest, if
+the predecessor has it or can get it with reasonable efforts.
+
+  You may not impose any further restrictions on the exercise of the
+rights granted or affirmed under this License.  For example, you may
+not impose a license fee, royalty, or other charge for exercise of
+rights granted under this License, and you may not initiate litigation
+(including a cross-claim or counterclaim in a lawsuit) alleging that
+any patent claim is infringed by making, using, selling, offering for
+sale, or importing the Program or any portion of it.
+
+  11. Patents.
+
+  A "contributor" is a copyright holder who authorizes use under this
+License of the Program or a work on which the Program is based.  The
+work thus licensed is called the contributor's "contributor version".
+
+  A contributor's "essential patent claims" are all patent claims
+owned or controlled by the contributor, whether already acquired or
+hereafter acquired, that would be infringed by some manner, permitted
+by this License, of making, using, or selling its contributor version,
+but do not include claims that would be infringed only as a
+consequence of further modification of the contributor version.  For
+purposes of this definition, "control" includes the right to grant
+patent sublicenses in a manner consistent with the requirements of
+this License.
+
+  Each contributor grants you a non-exclusive, worldwide, royalty-free
+patent license under the contributor's essential patent claims, to
+make, use, sell, offer for sale, import and otherwise run, modify and
+propagate the contents of its contributor version.
+
+  In the following three paragraphs, a "patent license" is any express
+agreement or commitment, however denominated, not to enforce a patent
+(such as an express permission to practice a patent or covenant not to
+sue for patent infringement).  To "grant" such a patent license to a
+party means to make such an agreement or commitment not to enforce a
+patent against the party.
+
+  If you convey a covered work, knowingly relying on a patent license,
+and the Corresponding Source of the work is not available for anyone
+to copy, free of charge and under the terms of this License, through a
+publicly available network server or other readily accessible means,
+then you must either (1) cause the Corresponding Source to be so
+available, or (2) arrange to deprive yourself of the benefit of the
+patent license for this particular work, or (3) arrange, in a manner
+consistent with the requirements of this License, to extend the patent
+license to downstream recipients.  "Knowingly relying" means you have
+actual knowledge that, but for the patent license, your conveying the
+covered work in a country, or your recipient's use of the covered work
+in a country, would infringe one or more identifiable patents in that
+country that you have reason to believe are valid.
+
+  If, pursuant to or in connection with a single transaction or
+arrangement, you convey, or propagate by procuring conveyance of, a
+covered work, and grant a patent license to some of the parties
+receiving the covered work authorizing them to use, propagate, modify
+or convey a specific copy of the covered work, then the patent license
+you grant is automatically extended to all recipients of the covered
+work and works based on it.
+
+  A patent license is "discriminatory" if it does not include within
+the scope of its coverage, prohibits the exercise of, or is
+conditioned on the non-exercise of one or more of the rights that are
+specifically granted under this License.  You may not convey a covered
+work if you are a party to an arrangement with a third party that is
+in the business of distributing software, under which you make payment
+to the third party based on the extent of your activity of conveying
+the work, and under which the third party grants, to any of the
+parties who would receive the covered work from you, a discriminatory
+patent license (a) in connection with copies of the covered work
+conveyed by you (or copies made from those copies), or (b) primarily
+for and in connection with specific products or compilations that
+contain the covered work, unless you entered into that arrangement,
+or that patent license was granted, prior to 28 March 2007.
+
+  Nothing in this License shall be construed as excluding or limiting
+any implied license or other defenses to infringement that may
+otherwise be available to you under applicable patent law.
+
+  12. No Surrender of Others' Freedom.
+
+  If conditions are imposed on you (whether by court order, agreement or
+otherwise) that contradict the conditions of this License, they do not
+excuse you from the conditions of this License.  If you cannot convey a
+covered work so as to satisfy simultaneously your obligations under this
+License and any other pertinent obligations, then as a consequence you may
+not convey it at all.  For example, if you agree to terms that obligate you
+to collect a royalty for further conveying from those to whom you convey
+the Program, the only way you could satisfy both those terms and this
+License would be to refrain entirely from conveying the Program.
+
+  13. Use with the GNU Affero General Public License.
+
+  Notwithstanding any other provision of this License, you have
+permission to link or combine any covered work with a work licensed
+under version 3 of the GNU Affero General Public License into a single
+combined work, and to convey the resulting work.  The terms of this
+License will continue to apply to the part which is the covered work,
+but the special requirements of the GNU Affero General Public License,
+section 13, concerning interaction through a network will apply to the
+combination as such.
+
+  14. Revised Versions of this License.
+
+  The Free Software Foundation may publish revised and/or new versions of
+the GNU General Public License from time to time.  Such new versions will
+be similar in spirit to the present version, but may differ in detail to
+address new problems or concerns.
+
+  Each version is given a distinguishing version number.  If the
+Program specifies that a certain numbered version of the GNU General
+Public License "or any later version" applies to it, you have the
+option of following the terms and conditions either of that numbered
+version or of any later version published by the Free Software
+Foundation.  If the Program does not specify a version number of the
+GNU General Public License, you may choose any version ever published
+by the Free Software Foundation.
+
+  If the Program specifies that a proxy can decide which future
+versions of the GNU General Public License can be used, that proxy's
+public statement of acceptance of a version permanently authorizes you
+to choose that version for the Program.
+
+  Later license versions may give you additional or different
+permissions.  However, no additional obligations are imposed on any
+author or copyright holder as a result of your choosing to follow a
+later version.
+
+  15. Disclaimer of Warranty.
+
+  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+APPLICABLE LAW.  EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT
+HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY
+OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,
+THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+PURPOSE.  THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM
+IS WITH YOU.  SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF
+ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
+
+  16. Limitation of Liability.
+
+  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MODIFIES AND/OR CONVEYS
+THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
+GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE
+USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF
+DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
+PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS),
+EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGES.
+
+  17. Interpretation of Sections 15 and 16.
+
+  If the disclaimer of warranty and limitation of liability provided
+above cannot be given local legal effect according to their terms,
+reviewing courts shall apply local law that most closely approximates
+an absolute waiver of all civil liability in connection with the
+Program, unless a warranty or assumption of liability accompanies a
+copy of the Program in return for a fee.
+
+                     END OF TERMS AND CONDITIONS
+
+            How to Apply These Terms to Your New Programs
+
+  If you develop a new program, and you want it to be of the greatest
+possible use to the public, the best way to achieve this is to make it
+free software which everyone can redistribute and change under these terms.
+
+  To do so, attach the following notices to the program.  It is safest
+to attach them to the start of each source file to most effectively
+state the exclusion of warranty; and each file should have at least
+the "copyright" line and a pointer to where the full notice is found.
+
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) <year>  <name of author>
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+Also add information on how to contact you by electronic and paper mail.
+
+  If the program does terminal interaction, make it output a short
+notice like this when it starts in an interactive mode:
+
+    <program>  Copyright (C) <year>  <name of author>
+    This program comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
+    This is free software, and you are welcome to redistribute it
+    under certain conditions; type `show c' for details.
+
+The hypothetical commands `show w' and `show c' should show the appropriate
+parts of the General Public License.  Of course, your program's commands
+might be different; for a GUI interface, you would use an "about box".
+
+  You should also get your employer (if you work as a programmer) or school,
+if any, to sign a "copyright disclaimer" for the program, if necessary.
+For more information on this, and how to apply and follow the GNU GPL, see
+<https://www.gnu.org/licenses/>.
+
+  The GNU General Public License does not permit incorporating your program
+into proprietary programs.  If your program is a subroutine library, you
+may consider it more useful to permit linking proprietary applications with
+the library.  If this is what you want to do, use the GNU Lesser General
+Public License instead of this License.  But first, please read
+<https://www.gnu.org/licenses/why-not-lgpl.html>.
+© 2020 GitHub, Inc.
